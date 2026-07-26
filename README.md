@@ -4,7 +4,7 @@ Static legal/support site and Google Play readiness package for **CardScanR: TCG
 
 ## Status
 
-**READY_FOR_OWNER_REVIEW** — public HTML still contains `OWNER_ACTION_REQUIRED` tokens and must not be published until validation passes.
+**READY_TO_PUBLISH** — public HTML validated; owner inputs applied. Do not push until you explicitly choose to create the remote and enable GitHub Pages.
 
 ## Source audit
 

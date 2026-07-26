@@ -31,11 +31,11 @@
   <main id="main" class="site-main prose">
     <p class="eyebrow">Account deletion</p>
     <h1>Delete Account and Data — CardScanR: TCG Card Scanner</h1>
-    <p class="meta">Package: <span class="package">com.cardscanr.app</span> · This page satisfies Google Play account-deletion disclosure requirements once a real support contact is confirmed.</p>
+    <p class="meta">Package: <span class="package">com.cardscanr.app</span> · CardScanR is operated by Andrew Gore.</p>
 
     <div class="callout warn">
       <strong>In-app deletion is not available yet.</strong>
-      <p>The audited CardScanR build does not provide a compliant in-app account-deletion control. The Privacy and trust screen states that a delete-account button is not shown until deletion is implemented end to end. Until that ships, use the email request method below.</p>
+      <p>The current CardScanR build does not provide an in-app account-deletion control. The Privacy and trust screen states that a delete-account button is not shown until deletion is implemented end to end. Until that ships, use the email request method below.</p>
     </div>
 
     <h2>1. Identify the app</h2>
@@ -51,12 +51,12 @@
     </ol>
 
     <h2>3. External deletion request</h2>
-    <p>Email support to request deletion of your CardScanR account and associated cloud data.</p>
+    <p>Email <a href="mailto:cardscanr.dev@gmail.com">cardscanr.dev@gmail.com</a> to request deletion of your CardScanR account and associated cloud data.</p>
     <div class="actions">
-      <a class="btn btn-primary" href="mailto:OWNER_ACTION_REQUIRED?subject=CardScanR%20account%20deletion%20request&amp;body=Please%20delete%20my%20CardScanR%20account%20and%20associated%20cloud%20data.%0A%0AApp%3A%20CardScanR%3A%20TCG%20Card%20Scanner%0APackage%3A%20com.cardscanr.app%0AAccount%20email%3A%20%0AGoogle%20or%20email%20sign-in%3A%20%0AAdditional%20notes%3A%20">Email a deletion request</a>
+      <a class="btn btn-primary" href="mailto:cardscanr.dev@gmail.com?subject=CardScanR%20account%20deletion%20request&amp;body=Please%20delete%20my%20CardScanR%20account%20and%20associated%20cloud%20data.%0A%0AApp%3A%20CardScanR%3A%20TCG%20Card%20Scanner%0APackage%3A%20com.cardscanr.app%0AAccount%20email%3A%20%0AGoogle%20or%20email%20sign-in%3A%20%0AAdditional%20notes%3A%20">Email a deletion request</a>
       <a class="btn btn-secondary" href="../support/">Support page</a>
     </div>
-    <p>Replace <strong>OWNER_ACTION_REQUIRED</strong> with the confirmed public support address before publishing this site. A static HTML form without a working backend is intentionally not provided.</p>
+    <p>A static HTML form without a working backend is intentionally not provided.</p>
 
     <h2>4. What to include</h2>
     <ul>
@@ -73,27 +73,26 @@
     <h2>6. What is deleted</h2>
     <p>Subject to verification, a deletion request is intended to cover cloud account data associated with CardScanR, including where present:</p>
     <ul>
-      <li>Supabase Auth user record for the app</li>
-      <li><code>user_profiles</code> row</li>
-      <li><code>user_collections</code> and <code>user_cards</code> rows for that user</li>
-      <li><code>scan_sessions</code> rows for that user</li>
+      <li>Your authentication account for the app</li>
+      <li>Cloud profile data</li>
+      <li>Cloud collection and card records for that account</li>
+      <li>Cloud scan-session records for that account</li>
     </ul>
 
     <h2>7. What may remain</h2>
     <ul>
-      <li><strong>Local device data</strong> (SQLite inventory, caches, preferences) remains until you clear app storage or uninstall. Sign-out does not wipe local collection data.</li>
-      <li><strong>Backups and logs</strong> held by infrastructure providers may persist for a limited operational period — exact retention is OWNER_ACTION_REQUIRED.</li>
+      <li><strong>Local device data</strong> (inventory, caches, preferences) remains until you clear app storage or uninstall. Sign-out does not wipe local collection data.</li>
+      <li><strong>Backups and logs</strong> held by infrastructure providers may persist for a limited operational period.</li>
       <li><strong>Legal holds</strong> if retention is required by law.</li>
-      <li><strong>Aggregated or de-identified operational metrics</strong> if any are later enabled — OWNER_ACTION_REQUIRED for launch analytics plans.</li>
     </ul>
 
     <h2>8. Processing time</h2>
-    <p>Expected deletion timeframe: <strong>OWNER_ACTION_REQUIRED</strong> (confirm before publication; Google Play commonly expects a stated window such as a number of days).</p>
+    <p>Verified deletion requests will normally be completed within 30 days.</p>
 
     <h2>9. Irreversible action</h2>
     <div class="callout warn">
       <strong>Warning.</strong>
-      <p>Account and cloud data deletion may be irreversible. Export any collection data you need before requesting deletion. CSV export in the audited app is not yet implemented.</p>
+      <p>Account and cloud data deletion may be irreversible. Export any collection data you need before requesting deletion. CSV export is not currently implemented in the app.</p>
     </div>
 
     <h2>10. Related pages</h2>
@@ -110,7 +109,7 @@
         <a href="../support/">Support</a>
         <a href="../terms/">Terms of Use</a>
       </nav>
-      <p class="footer-note">CardScanR: TCG Card Scanner · Package <span class="package">com.cardscanr.app</span> · Operated by OWNER_ACTION_REQUIRED</p>
+      <p class="footer-note">CardScanR: TCG Card Scanner · Package <span class="package">com.cardscanr.app</span><br>CardScanR is operated by Andrew Gore.</p>
     </div>
   </footer>
   <script src="../assets/js/site.js" defer></script>

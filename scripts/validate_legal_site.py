@@ -265,7 +265,7 @@ def write_report(failures: list[str], notes: list[str], pages: list[str]) -> Non
             (
                 "Not publishable."
                 if failures
-                else "Publishable — owner inputs appear resolved and structural checks passed."
+                else "Publishable - owner inputs appear resolved and structural checks passed."
             ),
             "",
         ]
