@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+# CardScanR legal and support pages. No sitemap required for this small site.

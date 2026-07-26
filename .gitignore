@@ -1,0 +1,33 @@
+# Local / OS
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Editors
+.idea/
+.vscode/
+*.swp
+*~
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Secrets / local env (never publish)
+.env
+.env.*
+*.pem
+*.p12
+*.keystore
+credentials.json
+service-account*.json
+*_secret*
+*_SERVICE_ROLE*
+
+# Validation scratch
+.validation_tmp/
+
+# OS junk
+ehthumbs.db

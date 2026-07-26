@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Privacy Policy for CardScanR: TCG Card Scanner (com.cardscanr.app).">
+  <title>Privacy Policy · CardScanR</title>
+  <link rel="icon" href="../assets/images/cardscanr_mark.png" type="image/png">
+  <link rel="stylesheet" href="../assets/css/site.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="../">
+        <img src="../assets/images/cardscanr_mark.png" width="40" height="40" alt="">
+        <span class="brand-text">
+          <span class="brand-name">CardScanR</span>
+          <span class="brand-tag">Legal &amp; Support</span>
+        </span>
+      </a>
+      <nav class="nav" aria-label="Primary">
+        <a href="../privacy/">Privacy</a>
+        <a href="../delete-account/">Delete account</a>
+        <a href="../support/">Support</a>
+        <a href="../terms/">Terms</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" class="site-main prose">
+    <p class="eyebrow">Privacy</p>
+    <h1>Privacy Policy for CardScanR: TCG Card Scanner</h1>
+    <p class="meta">Effective date: OWNER_ACTION_REQUIRED · Last updated: 27 July 2026 (draft pending owner confirmation)<br>
+    App: CardScanR: TCG Card Scanner · Package: <span class="package">com.cardscanr.app</span></p>
+
+    <div class="callout warn">
+      <strong>Publication status.</strong>
+      <p>This draft is based on a read-only audit of the current CardScanR application source. Operator identity, public support contact, retention periods not encoded in the app, and launch settings for ads/analytics/subscriptions still require owner confirmation. Do not treat this page as final until those items are resolved and the site validates cleanly.</p>
+    </div>
+
+    <h2>1. Who operates CardScanR</h2>
+    <p>CardScanR: TCG Card Scanner is operated by <strong>OWNER_ACTION_REQUIRED</strong> (public legal or trading name to be confirmed).</p>
+    <p>Contact for privacy and support: <strong>OWNER_ACTION_REQUIRED</strong> (public support email to be confirmed). Postal or business address: OWNER_ACTION_REQUIRED if required in your jurisdiction.</p>
+
+    <h2>2. Scope</h2>
+    <p>This policy describes information processed by the CardScanR Android application and related backend services used by the app. It does not claim compliance with any particular privacy law as a blanket guarantee. Where you have rights under applicable law, we will respond to valid requests through the contact method above.</p>
+
+    <h2>3. Information you provide</h2>
+    <h3>Account and sign-in</h3>
+    <p>CardScanR uses Supabase Authentication. You may sign in with:</p>
+    <ul>
+      <li><strong>Google account (OAuth)</strong> via Supabase’s Google provider. Google and Supabase process authentication data under their own terms and privacy policies.</li>
+      <li><strong>Email and password</strong> registered through Supabase Auth. Email address and authentication credentials are processed by Supabase.</li>
+    </ul>
+    <p>From the signed-in account, the app may read an email address and display name / full name from auth metadata for profile display and account screens.</p>
+
+    <h3>Profile and onboarding</h3>
+    <p>When signed in, the app stores a profile in Supabase table <code>user_profiles</code>, including items such as display name, country code, currency code, pricing market, pricing mode, main use case, TCG interests, and onboarding completion status.</p>
+
+    <h3>Collection, binders, and goals</h3>
+    <p>Card inventory is stored in a local SQLite database on your device. When you are signed in, supported inventory and collection records may sync to Supabase, including tables such as <code>user_cards</code> and <code>user_collections</code>. Synced card records can include card identity fields, condition, quantity, purchase and estimate fields, notes, tags, catalogue image URLs, and a <code>local_image_path</code> string field. Binder layouts and some planning data are described in-app as remaining on-device unless a signed-in sync path explicitly supports them.</p>
+
+    <h3>Scan sessions</h3>
+    <p>When signed in, the app can save scan session metadata to Supabase table <code>scan_sessions</code>, which may include scan mode, source, status, counts, and raw OCR text. This is metadata about scanning activity, not a guarantee that full card photographs are uploaded.</p>
+
+    <h2>4. Card scans, photographs, and OCR</h2>
+    <p>CardScanR requests camera permission when you open scanning. You may also choose images from your gallery via the system picker. Frames and photos are used to identify card text and artwork.</p>
+    <p><strong>On-device OCR:</strong> Text recognition uses Google ML Kit Text Recognition and OpenCV processing on the device.</p>
+    <p><strong>Cloud Vision:</strong> A Google Cloud Vision OCR path exists only as an unimplemented stub in the audited source and does not currently send images.</p>
+    <p>In-app privacy copy states that captured scan images stay on the device unless you deliberately export diagnostics or use a workflow that clearly sends evidence for processing. Separately, signed-in sync can upload card metadata (including catalogue image URLs and path strings). We do <em>not</em> claim that photographs are immediately deleted, encrypted at rest, anonymised, or retained for a fixed period unless and until those behaviours are confirmed.</p>
+
+    <h2>5. Pricing and card-data requests</h2>
+    <p>To match cards and show estimate values, the app may send card identity queries (such as name, set, collector number, language, or variant) to third-party or backend services, including:</p>
+    <ul>
+      <li>TCGdex API (<code>api.tcgdex.net</code>)</li>
+      <li>Pokémon TCG API (<code>api.pokemontcg.io</code>)</li>
+      <li>PokeWallet API (<code>api.pokewallet.io</code>) when configured</li>
+      <li>An optional CardScanR pricing backend URL supplied at build time</li>
+      <li>Supabase-hosted catalogue/image manifest lookups for official card artwork references</li>
+    </ul>
+    <p>An eBay sold-comps pricing module exists in source but is not credentialled for mobile builds in the audited code (<code>isConfigured</code> returns false). Pricing figures are estimates only.</p>
+
+    <h2>6. Device, preference, and diagnostic information</h2>
+    <ul>
+      <li><strong>Local preferences:</strong> SharedPreferences stores settings such as onboarding flags, developer-mode unlocks, market preferences, and UI options.</li>
+      <li><strong>Local caches:</strong> Catalogue search indexes, artwork caches, and similar files may be stored on device.</li>
+      <li><strong>Diagnostics:</strong> Optional troubleshooting exports can include app state, scan evidence, pricing status, and device-local logs. Developer diagnostics should remain off unless you are intentionally collecting a support bundle.</li>
+      <li><strong>Crash/analytics SDKs:</strong> The audited production dependency set does not include Firebase Analytics, Crashlytics, Sentry, or advertising SDKs. Whether analytics will be enabled at launch remains OWNER_ACTION_REQUIRED.</li>
+    </ul>
+
+    <h2>7. Purposes for processing</h2>
+    <ul>
+      <li>Create and authenticate your account</li>
+      <li>Complete onboarding and apply country/currency/pricing preferences</li>
+      <li>Recognise cards and maintain your collection</li>
+      <li>Sync supported cloud inventory when signed in</li>
+      <li>Retrieve catalogue metadata and estimated market values</li>
+      <li>Provide optional diagnostic exports you choose to generate</li>
+      <li>Respond to support and deletion requests</li>
+    </ul>
+
+    <h2>8. Local versus cloud processing</h2>
+    <dl>
+      <dt>Primarily local</dt>
+      <dd>Camera frames for live scanning, on-device OCR, local SQLite inventory, binder planning data (unless synced), SharedPreferences, and optional local diagnostic files.</dd>
+      <dt>Cloud / network</dt>
+      <dd>Supabase Auth and database sync for signed-in users; HTTPS requests to catalogue and pricing providers; download of catalogue artwork/manifest data; OAuth redirects for Google sign-in.</dd>
+    </dl>
+
+    <h2>9. Third-party service providers</h2>
+    <p>Depending on features you use, processors or independent providers may include Supabase (auth and database), Google (sign-in and on-device ML Kit), TCGdex, Pokémon TCG API, PokeWallet, and any configured CardScanR pricing or image CDN backends. Each provider processes data under its own policies. See the project’s third-party audit for public policy links to verify.</p>
+
+    <h2>10. Data sharing</h2>
+    <p>We do not sell personal information. Data is shared with service providers only as needed to operate CardScanR (authentication, sync, catalogue, and pricing lookups), or if required by law. Card identity queries sent to catalogue/pricing APIs are necessary to return match and price estimates.</p>
+
+    <h2>11. International processing</h2>
+    <p>Supabase and other providers may process data in data centres outside Australia. Exact hosting regions for your production project are OWNER_ACTION_REQUIRED.</p>
+
+    <h2>12. Security</h2>
+    <p>The app uses HTTPS for network calls and Supabase client keys intended for publishable/anon use. No security measure is perfect. Do not email passwords or payment secrets to support.</p>
+
+    <h2>13. Retention</h2>
+    <p>Local data remains on your device until you clear app storage, uninstall, or overwrite it. Cloud account, profile, collection, and scan-session data remain until deleted through a supported deletion process or otherwise removed by the operator. Specific retention periods are not encoded in the audited app and are OWNER_ACTION_REQUIRED.</p>
+
+    <h2>14. Account and data deletion</h2>
+    <p>In-app account deletion is <strong>not</strong> available in the audited build. The in-app Privacy and trust screen states that CardScanR does not show a delete-account button until that action is implemented end to end. You can request deletion via the <a href="../delete-account/">Delete Account and Data</a> page once a public support email is confirmed. Sign-out keeps local collection data on the device.</p>
+
+    <h2>15. Your choices and rights</h2>
+    <ul>
+      <li>Deny camera permission (manual entry remains available per in-app copy)</li>
+      <li>Avoid gallery selection if you do not want the app to read chosen photos</li>
+      <li>Sign out (local data remains)</li>
+      <li>Request account/cloud data deletion via support once contact details are published</li>
+      <li>Request access or correction of account information where applicable law provides that right</li>
+    </ul>
+
+    <h2>16. Children and target audience</h2>
+    <p>Minimum age and whether CardScanR is directed to children are OWNER_ACTION_REQUIRED. Until confirmed, do not assume the app is designed for children.</p>
+
+    <h2>17. Changes</h2>
+    <p>We may update this policy as the app or providers change. The effective and last-updated dates above will be revised when a final version is published.</p>
+
+    <h2>18. Contact</h2>
+    <p>Privacy questions for CardScanR: TCG Card Scanner: <strong>OWNER_ACTION_REQUIRED</strong>.</p>
+    <p><a class="btn btn-secondary" href="../support/">Support page</a>
+       <a class="btn btn-secondary" href="../delete-account/">Deletion page</a></p>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <nav class="footer-nav" aria-label="Footer">
+        <a href="../">Home</a>
+        <a href="../privacy/">Privacy Policy</a>
+        <a href="../delete-account/">Delete Account</a>
+        <a href="../data-deletion/">Data Deletion</a>
+        <a href="../support/">Support</a>
+        <a href="../terms/">Terms of Use</a>
+      </nav>
+      <p class="footer-note">CardScanR: TCG Card Scanner · Package <span class="package">com.cardscanr.app</span> · Operated by OWNER_ACTION_REQUIRED</p>
+    </div>
+  </footer>
+  <script src="../assets/js/site.js" defer></script>
+</body>
+</html>
