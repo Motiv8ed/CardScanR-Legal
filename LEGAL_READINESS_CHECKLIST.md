@@ -1,31 +1,29 @@
 # Legal Readiness Checklist — CardScanR
 
-Strict owner checklist. Tick only when done.
+Strict owner checklist.
 
 ## Required before publishing the website
 
-- [ ] O1 Public legal/trading name confirmed  
-- [ ] O2 Public support email confirmed and monitored  
-- [ ] O3 Address decision confirmed (publish or omit knowingly)  
-- [ ] O4 GitHub username confirmed  
-- [ ] O5 Governing law confirmed  
-- [ ] O6/O7 Age / children posture confirmed  
-- [ ] O15/O16 Retention + deletion timeframe confirmed  
-- [ ] O19 Hosting region wording confirmed if mentioned publicly  
-- [ ] O21 Privacy effective date set  
-- [ ] Replace every `OWNER_ACTION_REQUIRED` token in `docs/**/*.html`  
-- [ ] Prefill mailto links use the real support email  
-- [ ] Run `python scripts/validate_legal_site.py` — **must pass**  
-- [ ] Commit only after validation passes (or clearly mark draft; do not call it production-ready)  
-- [ ] Create public GitHub repo `cardscanr-legal` and enable Pages from `/docs`  
-- [ ] Verify HTTPS URLs load on mobile and desktop  
+- [x] O1 Public operator name confirmed — Andrew Gore  
+- [x] O2 Public support email confirmed — cardscanr.dev@gmail.com  
+- [x] O3 Address omitted from public pages  
+- [x] O4 GitHub Pages host confirmed — Motiv8ed / CardScanR-Legal  
+- [x] O5 Governing law — Queensland, Australia  
+- [x] Children posture — not directed to children; legal capacity required  
+- [x] Deletion timeframe — normally within 30 days  
+- [x] Privacy effective / last updated — 27 July 2026  
+- [x] All `OWNER_ACTION_REQUIRED` tokens removed from `docs/**/*.html`  
+- [x] Mailto links use cardscanr.dev@gmail.com  
+- [x] `python scripts/validate_legal_site.py` passes  
+- [x] Public GitHub repo `Motiv8ed/CardScanR-Legal` with Pages from `master` `/docs`  
+- [x] HTTPS URLs live at https://motiv8ed.github.io/CardScanR-Legal/  
 
 ## Required before uploading the AAB
 
 - [ ] `applicationId` is `com.cardscanr.app`  
 - [ ] Release signing configured (not debug)  
-- [ ] Privacy URL live in Play Console  
-- [ ] Account deletion URL live  
+- [ ] Privacy URL in Play Console: `https://motiv8ed.github.io/CardScanR-Legal/privacy/`  
+- [ ] Account deletion URL in Play Console: `https://motiv8ed.github.io/CardScanR-Legal/delete-account/`  
 - [ ] Data Safety answers match `play-console/DATA_SAFETY_WORKSHEET.md` after owner review  
 - [ ] Store listing text matches honest limitations  
 - [ ] Production Supabase + OAuth clients match package name  
@@ -44,10 +42,9 @@ Strict owner checklist. Tick only when done.
 ## Required before production application
 
 - [ ] In-app account deletion implemented and verified  
-- [ ] External deletion email process staffed within published timeframe  
-- [ ] Ads/analytics/subscriptions declarations match the binary (O9–O11)  
+- [ ] External deletion email process staffed within the published 30-day window  
+- [ ] Ads/analytics/subscriptions declarations match the binary  
 - [ ] Content rating questionnaire completed  
 - [ ] Target audience declarations completed  
 - [ ] Feature graphic / screenshots use approved brand assets only  
 - [ ] Final legal HTML re-validated and redeployed if wording changed  
-- [ ] Confirm CardScanR app repository was not modified by the legal packaging task (separate PR for app work)

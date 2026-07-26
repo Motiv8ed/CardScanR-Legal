@@ -43,20 +43,20 @@ CardScanR is an independent app and is not affiliated with Nintendo, Creatures, 
 
 card scanner, Pokémon TCG, trading cards, collection tracker, TCG, card binder, card price estimate
 
-## Support contact placeholders
+## Support contact
 
-- Email: OWNER_ACTION_REQUIRED  
-- Website: `https://GITHUB_USERNAME.github.io/cardscanr-legal/support/`  
+- Email: `cardscanr.dev@gmail.com`  
+- Website: `https://motiv8ed.github.io/CardScanR-Legal/support/`
 
 ## Website URLs
 
-| Purpose | URL template |
+| Purpose | URL |
 |---|---|
-| Home | `https://GITHUB_USERNAME.github.io/cardscanr-legal/` |
-| Privacy | `https://GITHUB_USERNAME.github.io/cardscanr-legal/privacy/` |
-| Account deletion | `https://GITHUB_USERNAME.github.io/cardscanr-legal/delete-account/` |
-| Support | `https://GITHUB_USERNAME.github.io/cardscanr-legal/support/` |
-| Terms | `https://GITHUB_USERNAME.github.io/cardscanr-legal/terms/` |
+| Home | `https://motiv8ed.github.io/CardScanR-Legal/` |
+| Privacy | `https://motiv8ed.github.io/CardScanR-Legal/privacy/` |
+| Account deletion | `https://motiv8ed.github.io/CardScanR-Legal/delete-account/` |
+| Support | `https://motiv8ed.github.io/CardScanR-Legal/support/` |
+| Terms | `https://motiv8ed.github.io/CardScanR-Legal/terms/` |
 
 ## Feature list (bullets for Console / screenshots captions)
 

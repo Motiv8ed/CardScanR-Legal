@@ -157,8 +157,8 @@ For each type: Collected? Shared? Ephemeral? Required? Purpose.
 
 | Console field | Draft |
 |---|---|
-| URL for account deletion | `https://GITHUB_USERNAME.github.io/cardscanr-legal/delete-account/` |
-| Also acceptable alias | `.../data-deletion/` → canonical delete-account |
+| URL for account deletion | `https://motiv8ed.github.io/CardScanR-Legal/delete-account/` |
+| Also acceptable alias | `https://motiv8ed.github.io/CardScanR-Legal/data-deletion/` (canonical: delete-account) |
 | In-app deletion | Not available — implement before relying on in-app path (see APP_CHANGES_REQUIRED) |
 
 ## Sharing definition caution

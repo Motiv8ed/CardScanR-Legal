@@ -52,8 +52,11 @@ None identified in audited source. If added later, update this document with unl
 - eBay sold-comps path may show as not configured  
 - Cloud Vision “better OCR” is stubbed  
 - In-app account deletion is not available; deletion is via website/email  
+  (`https://motiv8ed.github.io/CardScanR-Legal/delete-account/` or cardscanr.dev@gmail.com)  
 - Package rename from `com.example.card_scanner_app` must be completed for production AAB  
 - Do not instruct reviewers to enable developer diagnostics unless needed for a specific bug  
+- Public privacy policy: `https://motiv8ed.github.io/CardScanR-Legal/privacy/`  
+- Public support: `https://motiv8ed.github.io/CardScanR-Legal/support/`  
 
 ## Placeholder for Console paste (fill privately)
 
