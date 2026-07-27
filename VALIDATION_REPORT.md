@@ -1,6 +1,6 @@
 # Validation Report
 
-- Generated: 2026-07-26 22:08:48Z
+- Generated: 2026-07-27 20:01:10Z
 - Result: **PASSED**
 - Docs root: `D:\CardScanR-Legal\docs`
 - Pages checked: 7
