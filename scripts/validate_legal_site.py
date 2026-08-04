@@ -8,6 +8,7 @@ Writes VALIDATION_REPORT.md in the repository root.
 from __future__ import annotations
 
 import hashlib
+import json
 import re
 import sys
 from datetime import datetime, timezone
@@ -26,11 +27,19 @@ REQUIRED_PATHS = [
     "data-deletion/index.html",
     "support/index.html",
     "terms/index.html",
+    "auth/callback/index.html",
+    ".well-known/assetlinks.json",
+    "CNAME.pending",
     "404.html",
     "assets/css/site.css",
     "assets/js/site.js",
     ".nojekyll",
     "robots.txt",
+]
+
+# Must not exist until owner confirms DNS (breaks github.io otherwise).
+FORBIDDEN_UNTIL_DNS = [
+    "CNAME",
 ]
 
 PLACEHOLDER_PATTERNS = [
@@ -65,6 +74,10 @@ LOCALHOST = re.compile(r"localhost|127\.0\.0\.1", re.I)
 CONTACT_HINT = re.compile(
     r"(mailto:)|(\bemail\b)|(\bsupport\b)|(@[A-Za-z0-9.-]+\.[A-Za-z]{2,})",
     re.I,
+)
+
+SHA256_FINGERPRINT = re.compile(
+    r"^[0-9A-Fa-f]{2}(?::[0-9A-Fa-f]{2}){31}$"
 )
 
 
@@ -105,6 +118,9 @@ def resolve_href(page: Path, href: str) -> Path | None:
     parsed = urlparse(href)
     if parsed.scheme in {"http", "https", "data", "javascript"}:
         return None
+    # App deep links and other custom schemes (e.g. cardscanr://login-callback)
+    if parsed.scheme and parsed.scheme not in {"", "file"}:
+        return None
     raw = unquote(parsed.path)
     if not raw:
         return None
@@ -120,6 +136,67 @@ def resolve_href(page: Path, href: str) -> Path | None:
     return target
 
 
+def validate_assetlinks(failures: list[str], notes: list[str]) -> None:
+    path = DOCS / ".well-known" / "assetlinks.json"
+    if not path.exists():
+        return
+    rel = ".well-known/assetlinks.json"
+    try:
+        data = json.loads(path.read_text(encoding="utf-8"))
+    except json.JSONDecodeError as exc:
+        failures.append(f"{rel}: invalid JSON ({exc})")
+        return
+
+    if not isinstance(data, list) or not data:
+        failures.append(f"{rel}: expected a non-empty JSON array")
+        return
+
+    entry = data[0]
+    if not isinstance(entry, dict):
+        failures.append(f"{rel}: first entry must be an object")
+        return
+
+    target = entry.get("target")
+    if not isinstance(target, dict):
+        failures.append(f"{rel}: missing target object")
+        return
+
+    if target.get("namespace") != "android_app":
+        failures.append(f"{rel}: target.namespace must be android_app")
+    if target.get("package_name") != "com.cardscanr.app":
+        failures.append(f"{rel}: package_name must be com.cardscanr.app")
+
+    fps = target.get("sha256_cert_fingerprints")
+    if not isinstance(fps, list):
+        failures.append(f"{rel}: sha256_cert_fingerprints must be an array")
+        return
+
+    # Empty array is allowed (owner still adding certs); fingerprints must be well-formed.
+    for fp in fps:
+        if not isinstance(fp, str) or not SHA256_FINGERPRINT.match(fp):
+            failures.append(f"{rel}: malformed sha256 fingerprint: {fp!r}")
+
+    if fps:
+        notes.append(
+            f"{rel}: {len(fps)} sha256_cert_fingerprints present "
+            "(upload/test certs only until Play App Signing fingerprint is added — see DEPLOYMENT.md)"
+        )
+    else:
+        notes.append(f"{rel}: sha256_cert_fingerprints is empty — App Links incomplete")
+
+
+def validate_cname_pending(failures: list[str], notes: list[str]) -> None:
+    pending = DOCS / "CNAME.pending"
+    if pending.exists():
+        content = pending.read_text(encoding="utf-8").strip()
+        if content != "cardscanr.com":
+            failures.append(
+                f"CNAME.pending: expected 'cardscanr.com', found {content!r}"
+            )
+        else:
+            notes.append("CNAME.pending ready for rename when DNS is confirmed")
+
+
 def main() -> int:
     failures: list[str] = []
     notes: list[str] = []
@@ -133,6 +210,16 @@ def main() -> int:
     for rel in REQUIRED_PATHS:
         if not (DOCS / rel).exists():
             failures.append(f"Required path missing: docs/{rel}")
+
+    for rel in FORBIDDEN_UNTIL_DNS:
+        if (DOCS / rel).exists():
+            failures.append(
+                f"docs/{rel} must not exist until DNS for cardscanr.com is confirmed "
+                "(rename from CNAME.pending only when ready)"
+            )
+
+    validate_assetlinks(failures, notes)
+    validate_cname_pending(failures, notes)
 
     html_files = sorted(DOCS.rglob("*.html"))
     if not html_files:
@@ -180,22 +267,43 @@ def main() -> int:
                 failures.append(f"{rel}: broken internal link '{href}' -> {target}")
 
         body = " ".join(parser.text_chunks) + "\n" + text
-        if rel in {"privacy/index.html", "delete-account/index.html", "data-deletion/index.html"}:
+        if rel in {
+            "privacy/index.html",
+            "delete-account/index.html",
+            "data-deletion/index.html",
+            "auth/callback/index.html",
+        }:
             if "CardScanR" not in body:
                 failures.append(f"{rel}: does not identify CardScanR")
 
-        if rel in {"index.html", "privacy/index.html", "delete-account/index.html", "support/index.html", "terms/index.html"}:
+        if rel in {
+            "index.html",
+            "privacy/index.html",
+            "delete-account/index.html",
+            "support/index.html",
+            "terms/index.html",
+            "auth/callback/index.html",
+        }:
             if not CONTACT_HINT.search(body):
                 failures.append(f"{rel}: contact information appears missing")
 
+        if rel == "auth/callback/index.html":
+            if "cardscanr://login-callback" not in text:
+                failures.append(f"{rel}: missing cardscanr://login-callback deep-link fallback")
+
     # Publishable gate: any OWNER token anywhere in docs HTML already failed above.
-    if any("OWNER_ACTION_REQUIRED" in (DOCS / p).read_text(encoding="utf-8") for p in [
-        "index.html",
-        "privacy/index.html",
-        "delete-account/index.html",
-        "support/index.html",
-        "terms/index.html",
-    ] if (DOCS / p).exists()):
+    if any(
+        "OWNER_ACTION_REQUIRED" in (DOCS / p).read_text(encoding="utf-8")
+        for p in [
+            "index.html",
+            "privacy/index.html",
+            "delete-account/index.html",
+            "support/index.html",
+            "terms/index.html",
+            "auth/callback/index.html",
+        ]
+        if (DOCS / p).exists()
+    ):
         notes.append(
             "Public docs are NOT publishable until owner inputs used by public pages are resolved."
         )

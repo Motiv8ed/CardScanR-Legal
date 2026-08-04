@@ -39,13 +39,13 @@
     <div class="actions">
       <a class="btn btn-primary" href="mailto:cardscanr.dev@gmail.com?subject=CardScanR%20support">Email support</a>
     </div>
-    <p>Use this address for general support, privacy enquiries, and account or data deletion requests. No web form is offered because this static site has no backend.</p>
+    <p>Use this address for general support, privacy enquiries, sign-in help, sync help, and account or data deletion requests. No web form is offered because this static site has no backend.</p>
 
     <h2>What to include</h2>
     <ul>
       <li>App name: CardScanR: TCG Card Scanner</li>
       <li>Android package: <span class="package">com.cardscanr.app</span></li>
-      <li>App version shown in Settings → About</li>
+      <li><strong>App version</strong> from Settings → About (version name and version code if shown)</li>
       <li>Device model and Android version</li>
       <li>Whether you use Google or email sign-in</li>
       <li>A clear description of the issue and steps to reproduce</li>
@@ -57,11 +57,26 @@
       <p>Do not email passwords, payment card details, one-time codes, recovery keys, or other sensitive secrets. If you export a diagnostics bundle, review it before sharing — diagnostics may include scan evidence, pricing status, and device-local logs.</p>
     </div>
 
+    <h2>Sign-in help</h2>
+    <ul>
+      <li>Confirm you are using the Play / release package <span class="package">com.cardscanr.app</span>.</li>
+      <li>After Google sign-in in the browser, return to the app. If the app does not open, use the OAuth return page deep link <code>cardscanr://login-callback</code> or reopen CardScanR and try again.</li>
+      <li>For email sign-in, check spam for verification mail from the auth provider and confirm the email address is typed correctly.</li>
+      <li>If stuck on a browser page, see <a href="../auth/callback/">Sign-in return</a>.</li>
+    </ul>
+
+    <h2>Cloud sync help</h2>
+    <ul>
+      <li>Collection data stays on-device until you explicitly opt in to cloud sync while signed in.</li>
+      <li>Sync uploads collection <strong>metadata</strong> — it does not upload card photographs from your camera.</li>
+      <li>If sync fails, note whether you are signed in, whether sync is enabled in Settings, and the app version from About, then email support.</li>
+    </ul>
+
     <h2>Account deletion</h2>
-    <p>Initiate deletion inside CardScanR through Settings → Privacy &amp; Security → Request account deletion. That control opens the <a href="../delete-account/">Delete Account and Data</a> hosted request page; it does not complete deletion by itself. You can also submit the request on that page or email <a href="mailto:cardscanr.dev@gmail.com">cardscanr.dev@gmail.com</a> without signing in. Sign out does not delete the account or remove local collection data. Verified requests are processed by the operator after identity confirmation.</p>
+    <p>See <a href="../delete-account/">Delete Account and Data</a> for in-app paths, email requests, and what is deleted versus retained. Sign out does not delete the account or remove local collection data.</p>
 
     <h2>Policies</h2>
-    <p><a href="../privacy/">Privacy Policy</a> · <a href="../terms/">Terms of Use</a></p>
+    <p><a href="../privacy/">Privacy Policy</a> · <a href="../terms/">Terms of Use</a> · <a href="../delete-account/">Delete Account and Data</a></p>
   </main>
 
   <footer class="site-footer">

@@ -1,0 +1,14 @@
+[
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.cardscanr.app",
+      "sha256_cert_fingerprints": [
+        "B8:08:4B:10:C0:B8:7F:AD:34:F2:E9:EC:44:6E:4A:63:D0:44:A4:B1:E6:B8:20:67:5D:33:13:52:C1:EE:40:B6"
+      ]
+    }
+  }
+]
