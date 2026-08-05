@@ -7,7 +7,8 @@
       "namespace": "android_app",
       "package_name": "com.cardscanr.app",
       "sha256_cert_fingerprints": [
-        "B8:08:4B:10:C0:B8:7F:AD:34:F2:E9:EC:44:6E:4A:63:D0:44:A4:B1:E6:B8:20:67:5D:33:13:52:C1:EE:40:B6"
+        "B8:08:4B:10:C0:B8:7F:AD:34:F2:E9:EC:44:6E:4A:63:D0:44:A4:B1:E6:B8:20:67:5D:33:13:52:C1:EE:40:B6",
+        "7E:13:F4:EC:6F:EA:D7:27:EB:6A:C7:40:57:9E:82:5A:47:6D:4C:97:A2:75:0E:85:99:8B:25:1A:2C:24:FD:DB"
       ]
     }
   }
