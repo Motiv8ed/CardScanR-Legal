@@ -26,21 +26,26 @@ REQUIRED_PATHS = [
     "delete-account/index.html",
     "data-deletion/index.html",
     "support/index.html",
+    "feedback/index.html",
     "terms/index.html",
     "auth/callback/index.html",
     ".well-known/assetlinks.json",
-    "CNAME.pending",
     "404.html",
     "assets/css/site.css",
     "assets/js/site.js",
+    "assets/js/feedback-config.js",
+    "assets/js/feedback.js",
+    "_headers",
+    "_redirects",
     ".nojekyll",
     "robots.txt",
 ]
 
-# Must not exist until owner confirms DNS (breaks github.io otherwise).
-FORBIDDEN_UNTIL_DNS = [
-    "CNAME",
-]
+# At least one of these must exist (Cloudflare Pages owns domain; GitHub uses pending).
+CNAME_OPTIONS = ["CNAME", "CNAME.pending"]
+
+# Merged into dist at Cloudflare deploy — not required in docs/ for link checks.
+DEPLOY_MERGED_PREFIXES = ("beta/", "beta")
 
 PLACEHOLDER_PATTERNS = [
     re.compile(r"OWNER_ACTION_REQUIRED", re.I),
@@ -63,10 +68,17 @@ SECRET_PATTERNS = [
     re.compile(r"-----BEGIN CERTIFICATE-----"),
 ]
 
-REMOTE_SCRIPT_PATTERNS = [
-    re.compile(r"<script[^>]+src=['\"]https?://", re.I),
-    re.compile(r"googletagmanager|google-analytics|gtag\(|facebook\.net|hotjar|segment\.com|mixpanel|plausible\.io|clarity\.ms", re.I),
-]
+REMOTE_SCRIPT_BLOCK = re.compile(r"<script[^>]+src=['\"]https?://", re.I)
+ANALYTICS_BLOCK = re.compile(
+    r"googletagmanager|google-analytics|gtag\(|facebook\.net|hotjar|segment\.com|mixpanel|plausible\.io|clarity\.ms",
+    re.I,
+)
+TURNSTILE_ALLOWED = re.compile(r"^https://challenges\.cloudflare\.com/", re.I)
+CANONICAL_RE = re.compile(
+    r'<link\s+rel=["\']canonical["\']\s+href=["\']https://cardscanr\.com/[^"\']*["\']',
+    re.I,
+)
+FEEDBACK_NAV_RE = re.compile(r'href=["\'][^"\']*feedback/?["\']', re.I)
 
 WINDOWS_PATH = re.compile(r"[A-Za-z]:\\|/Users/|/home/\w+/")
 LOCALHOST = re.compile(r"localhost|127\.0\.0\.1", re.I)
@@ -111,6 +123,16 @@ def rel_from_docs(path: Path) -> str:
     return path.relative_to(DOCS).as_posix()
 
 
+def is_deploy_merged_href(href: str) -> bool:
+    href = href.strip().rstrip("/")
+    for prefix in DEPLOY_MERGED_PREFIXES:
+        if href == prefix or href.endswith("/" + prefix) or href.endswith(prefix):
+            return True
+        if href.startswith(prefix + "/") or href.startswith("../" + prefix):
+            return True
+    return "beta/" in href or href.endswith("/beta") or href == "beta"
+
+
 def resolve_href(page: Path, href: str) -> Path | None:
     href = href.strip()
     if not href or href.startswith(("#", "mailto:", "tel:")):
@@ -118,7 +140,6 @@ def resolve_href(page: Path, href: str) -> Path | None:
     parsed = urlparse(href)
     if parsed.scheme in {"http", "https", "data", "javascript"}:
         return None
-    # App deep links and other custom schemes (e.g. cardscanr://login-callback)
     if parsed.scheme and parsed.scheme not in {"", "file"}:
         return None
     raw = unquote(parsed.path)
@@ -171,7 +192,6 @@ def validate_assetlinks(failures: list[str], notes: list[str]) -> None:
         failures.append(f"{rel}: sha256_cert_fingerprints must be an array")
         return
 
-    # Empty array is allowed (owner still adding certs); fingerprints must be well-formed.
     for fp in fps:
         if not isinstance(fp, str) or not SHA256_FINGERPRINT.match(fp):
             failures.append(f"{rel}: malformed sha256 fingerprint: {fp!r}")
@@ -185,16 +205,47 @@ def validate_assetlinks(failures: list[str], notes: list[str]) -> None:
         notes.append(f"{rel}: sha256_cert_fingerprints is empty — App Links incomplete")
 
 
-def validate_cname_pending(failures: list[str], notes: list[str]) -> None:
-    pending = DOCS / "CNAME.pending"
-    if pending.exists():
-        content = pending.read_text(encoding="utf-8").strip()
+def validate_cname(failures: list[str], notes: list[str]) -> None:
+    found = [name for name in CNAME_OPTIONS if (DOCS / name).exists()]
+    if not found:
+        failures.append(
+            "Missing domain marker: docs/CNAME or docs/CNAME.pending required"
+        )
+        return
+    if len(found) > 1:
+        notes.append(
+            "Both CNAME and CNAME.pending exist — Cloudflare Pages should use CNAME; "
+            "remove docs/CNAME from GitHub Pages branch if github.io fallback must stay active"
+        )
+    for name in found:
+        content = (DOCS / name).read_text(encoding="utf-8").strip()
         if content != "cardscanr.com":
-            failures.append(
-                f"CNAME.pending: expected 'cardscanr.com', found {content!r}"
-            )
+            failures.append(f"{name}: expected 'cardscanr.com', found {content!r}")
         else:
-            notes.append("CNAME.pending ready for rename when DNS is confirmed")
+            notes.append(f"{name} present with cardscanr.com")
+
+
+def validate_remote_scripts(rel: str, text: str, failures: list[str]) -> None:
+    is_feedback = rel == "feedback/index.html"
+    if ANALYTICS_BLOCK.search(text):
+        failures.append(f"{rel}: remote script/analytics pattern matched")
+
+    parser = LinkCollector()
+    try:
+        parser.feed(text)
+    except Exception:
+        parser.scripts = []
+
+    for src in parser.scripts:
+        if not src.startswith(("http://", "https://", "//")):
+            continue
+        normalised = src if not src.startswith("//") else "https:" + src
+        if is_feedback and TURNSTILE_ALLOWED.match(normalised):
+            continue
+        failures.append(f"{rel}: remote script src '{src}'")
+
+    if not is_feedback and REMOTE_SCRIPT_BLOCK.search(text):
+        failures.append(f"{rel}: remote script tag found")
 
 
 def main() -> int:
@@ -211,15 +262,8 @@ def main() -> int:
         if not (DOCS / rel).exists():
             failures.append(f"Required path missing: docs/{rel}")
 
-    for rel in FORBIDDEN_UNTIL_DNS:
-        if (DOCS / rel).exists():
-            failures.append(
-                f"docs/{rel} must not exist until DNS for cardscanr.com is confirmed "
-                "(rename from CNAME.pending only when ready)"
-            )
-
     validate_assetlinks(failures, notes)
-    validate_cname_pending(failures, notes)
+    validate_cname(failures, notes)
 
     html_files = sorted(DOCS.rglob("*.html"))
     if not html_files:
@@ -244,9 +288,16 @@ def main() -> int:
             if pat.search(text):
                 failures.append(f"{rel}: secret-like pattern matched /{pat.pattern}/")
 
-        for pat in REMOTE_SCRIPT_PATTERNS:
-            if pat.search(text):
-                failures.append(f"{rel}: remote script/analytics pattern matched")
+        validate_remote_scripts(rel, text, failures)
+
+        if not CANONICAL_RE.search(text):
+            failures.append(
+                f"{rel}: missing canonical link https://cardscanr.com/..."
+            )
+
+        if rel in {"index.html", "support/index.html", "feedback/index.html"}:
+            if not FEEDBACK_NAV_RE.search(text):
+                failures.append(f"{rel}: Feedback link missing from navigation")
 
         parser = LinkCollector()
         try:
@@ -255,11 +306,9 @@ def main() -> int:
             failures.append(f"{rel}: HTML parse error: {exc}")
             continue
 
-        for src in parser.scripts:
-            if src.startswith(("http://", "https://", "//")):
-                failures.append(f"{rel}: remote script src '{src}'")
-
         for href in parser.hrefs:
+            if is_deploy_merged_href(href):
+                continue
             target = resolve_href(page, href)
             if target is None:
                 continue
@@ -281,6 +330,7 @@ def main() -> int:
             "privacy/index.html",
             "delete-account/index.html",
             "support/index.html",
+            "feedback/index.html",
             "terms/index.html",
             "auth/callback/index.html",
         }:
@@ -291,7 +341,6 @@ def main() -> int:
             if "cardscanr://login-callback" not in text:
                 failures.append(f"{rel}: missing cardscanr://login-callback deep-link fallback")
 
-    # Publishable gate: any OWNER token anywhere in docs HTML already failed above.
     if any(
         "OWNER_ACTION_REQUIRED" in (DOCS / p).read_text(encoding="utf-8")
         for p in [
@@ -299,6 +348,7 @@ def main() -> int:
             "privacy/index.html",
             "delete-account/index.html",
             "support/index.html",
+            "feedback/index.html",
             "terms/index.html",
             "auth/callback/index.html",
         ]
@@ -308,7 +358,6 @@ def main() -> int:
             "Public docs are NOT publishable until owner inputs used by public pages are resolved."
         )
 
-    # Asset presence for brand images referenced by pages
     for img in [
         "assets/images/cardscanr_mark.png",
         "assets/images/cardscanr_logo.png",
@@ -350,7 +399,6 @@ def write_report(failures: list[str], notes: list[str], pages: list[str]) -> Non
         lines.append(f"- `{p}`")
     lines.extend(["", "## Failures", ""])
     if failures:
-        # de-dupe preserving order
         seen: set[str] = set()
         for f in failures:
             if f in seen:

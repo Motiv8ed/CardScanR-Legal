@@ -3,7 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Legal and support information for CardScanR: TCG Card Scanner (com.cardscanr.app).">
+  <meta name="description" content="Legal, support, and feedback for CardScanR: TCG Card Scanner (com.cardscanr.app). Privacy, account deletion, beta help, and secure feedback.">
+  <link rel="canonical" href="https://cardscanr.com/">
   <meta name="robots" content="index,follow">
   <title>CardScanR Legal &amp; Support</title>
   <link rel="icon" href="assets/images/cardscanr_mark.png" type="image/png">
@@ -20,11 +21,16 @@
           <span class="brand-tag">Legal &amp; Support</span>
         </span>
       </a>
-      <nav class="nav" aria-label="Primary">
-        <a href="privacy/">Privacy</a>
-        <a href="delete-account/">Delete account</a>
+      <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="site-nav" aria-label="Open menu">
+        <span class="nav-toggle-icon" aria-hidden="true"></span>
+      </button>
+      <nav class="nav" id="site-nav" aria-label="Primary">
+        <a href="./">Home</a>
         <a href="support/">Support</a>
+        <a href="feedback/">Feedback</a>
+        <a href="privacy/">Privacy</a>
         <a href="terms/">Terms</a>
+        <a href="delete-account/">Delete account</a>
       </nav>
     </div>
   </header>
@@ -34,11 +40,23 @@
       <img class="hero-brand" src="assets/images/cardscanr_logo.png" width="280" height="84" alt="CardScanR">
       <p class="eyebrow">Legal &amp; support</p>
       <h1 id="page-title">CardScanR: TCG Card Scanner</h1>
-      <p class="lede">Official privacy, account deletion, support, and terms pages for the CardScanR Android app (<span class="package">com.cardscanr.app</span>).</p>
+      <p class="lede">Official privacy, account deletion, support, feedback, and terms pages for the CardScanR Android app (<span class="package">com.cardscanr.app</span>). Get help with the closed beta, sign-in, scanning, and collection tools — or send secure feedback.</p>
       <p class="meta">CardScanR is operated by Andrew Gore.</p>
     </section>
 
     <ul class="card-grid">
+      <li>
+        <a href="support/">
+          <h2>Support</h2>
+          <p>Closed beta installation, sign-in, scanner, collection, and pricing help.</p>
+        </a>
+      </li>
+      <li>
+        <a href="feedback/">
+          <h2>Feedback</h2>
+          <p>Report bugs, suggest features, or flag incorrect matches and prices.</p>
+        </a>
+      </li>
       <li>
         <a href="privacy/">
           <h2>Privacy Policy</h2>
@@ -52,15 +70,15 @@
         </a>
       </li>
       <li>
-        <a href="support/">
-          <h2>Support</h2>
-          <p>Contact details and what to include when you need help.</p>
-        </a>
-      </li>
-      <li>
         <a href="terms/">
           <h2>Terms of Use</h2>
           <p>Practical terms covering scanning, pricing estimates, and acceptable use.</p>
+        </a>
+      </li>
+      <li>
+        <a href="beta/">
+          <h2>Closed beta</h2>
+          <p>Apply for CardScanR closed beta access on the live site.</p>
         </a>
       </li>
     </ul>
@@ -74,14 +92,14 @@
   <footer class="site-footer">
     <div class="footer-inner">
       <nav class="footer-nav" aria-label="Footer">
-        <a href="./">Home</a>
-        <a href="privacy/">Privacy Policy</a>
-        <a href="delete-account/">Delete Account</a>
-        <a href="data-deletion/">Data Deletion</a>
+        <a href="./">CardScanR</a>
         <a href="support/">Support</a>
-        <a href="terms/">Terms of Use</a>
+        <a href="feedback/">Feedback</a>
+        <a href="privacy/">Privacy</a>
+        <a href="terms/">Terms</a>
+        <a href="delete-account/">Delete account</a>
       </nav>
-      <p class="footer-note">CardScanR: TCG Card Scanner · Package <span class="package">com.cardscanr.app</span><br>CardScanR is operated by Andrew Gore.</p>
+      <p class="footer-note">© <span data-year>2026</span> Andrew Gore · CardScanR: TCG Card Scanner · Package <span class="package">com.cardscanr.app</span><br>Pokémon and related marks are trademarks of their respective owners. CardScanR is not affiliated with Nintendo, Creatures, Game Freak, or eBay.</p>
     </div>
   </footer>
   <script src="assets/js/site.js" defer></script>

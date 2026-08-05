@@ -3,7 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Support contact for CardScanR: TCG Card Scanner (com.cardscanr.app).">
+  <meta name="description" content="Support for CardScanR: TCG Card Scanner — closed beta, sign-in, scanner, collection, pricing, and account help.">
+  <link rel="canonical" href="https://cardscanr.com/support/">
   <title>Support · CardScanR</title>
   <link rel="icon" href="../assets/images/cardscanr_mark.png" type="image/png">
   <link rel="stylesheet" href="../assets/css/site.css">
@@ -19,11 +20,16 @@
           <span class="brand-tag">Legal &amp; Support</span>
         </span>
       </a>
-      <nav class="nav" aria-label="Primary">
-        <a href="../privacy/">Privacy</a>
-        <a href="../delete-account/">Delete account</a>
+      <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="site-nav" aria-label="Open menu">
+        <span class="nav-toggle-icon" aria-hidden="true"></span>
+      </button>
+      <nav class="nav" id="site-nav" aria-label="Primary">
+        <a href="../">Home</a>
         <a href="../support/">Support</a>
+        <a href="../feedback/">Feedback</a>
+        <a href="../privacy/">Privacy</a>
         <a href="../terms/">Terms</a>
+        <a href="../delete-account/">Delete account</a>
       </nav>
     </div>
   </header>
@@ -31,65 +37,101 @@
   <main id="main" class="site-main prose">
     <p class="eyebrow">Support</p>
     <h1>CardScanR Support</h1>
-    <p class="lede">Help for CardScanR: TCG Card Scanner (<span class="package">com.cardscanr.app</span>).</p>
+    <p class="lede">Help for CardScanR: TCG Card Scanner (<span class="package">com.cardscanr.app</span>). This page explains common problems. To report a bug or suggest a feature, use the <a href="../feedback/">Feedback</a> form.</p>
 
     <h2>Contact</h2>
-    <p>CardScanR is operated by Andrew Gore.</p>
-    <p>Email: <a href="mailto:cardscanr.dev@gmail.com"><strong>cardscanr.dev@gmail.com</strong></a></p>
+    <p><strong>Primary:</strong> <a href="../feedback/">Secure feedback form</a> — best for bugs, incorrect data, and improvement ideas.</p>
+    <p><strong>Secondary:</strong> Email <a href="mailto:cardscanr.dev@gmail.com"><strong>cardscanr.dev@gmail.com</strong></a> for account, privacy, or sign-in help when the form is not suitable.</p>
+    <p>We aim to review beta feedback within 3–5 business days.</p>
     <div class="actions">
-      <a class="btn btn-primary" href="mailto:cardscanr.dev@gmail.com?subject=CardScanR%20support">Email support</a>
+      <a class="btn btn-primary" href="../feedback/">Report a bug or suggest an improvement</a>
+      <a class="btn btn-secondary" href="mailto:cardscanr.dev@gmail.com?subject=CardScanR%20support">Email support</a>
     </div>
-    <p>Use this address for general support, privacy enquiries, sign-in help, sync help, and account or data deletion requests. No web form is offered because this static site has no backend.</p>
-
-    <h2>What to include</h2>
-    <ul>
-      <li>App name: CardScanR: TCG Card Scanner</li>
-      <li>Android package: <span class="package">com.cardscanr.app</span></li>
-      <li><strong>App version</strong> from Settings → About (version name and version code if shown)</li>
-      <li>Device model and Android version</li>
-      <li>Whether you use Google or email sign-in</li>
-      <li>A clear description of the issue and steps to reproduce</li>
-      <li>Screenshots if helpful (avoid including personal photos unrelated to the issue)</li>
-    </ul>
 
     <div class="callout warn">
       <strong>Privacy warning.</strong>
-      <p>Do not email passwords, payment card details, one-time codes, recovery keys, or other sensitive secrets. If you export a diagnostics bundle, review it before sharing — diagnostics may include scan evidence, pricing status, and device-local logs.</p>
+      <p>Do not send passwords, payment card details, one-time codes, recovery keys, or government identifiers. If you export a diagnostics bundle, review it before sharing — diagnostics may include scan evidence, pricing status, and device-local logs.</p>
     </div>
 
-    <h2>Sign-in help</h2>
+    <h2>Closed beta installation</h2>
+    <ul>
+      <li>Testers must be added using the <strong>Google account</strong> used by their Play Store.</li>
+      <li>After approval, open the Google Play opt-in link provided to you (not published here).</li>
+      <li>The Play listing may take time to appear after you join the beta programme.</li>
+      <li>If the wrong Play Store account opens, switch accounts in the Play Store app and try again.</li>
+      <li>Apply for closed beta access at <a href="../beta/">Closed beta</a> when applications are open.</li>
+    </ul>
+
+    <h2>Google sign-in</h2>
     <ul>
       <li>Confirm you are using the Play / release package <span class="package">com.cardscanr.app</span>.</li>
-      <li>After Google sign-in in the browser, return to the app. If the app does not open, use the OAuth return page deep link <code>cardscanr://login-callback</code> or reopen CardScanR and try again.</li>
-      <li>For email sign-in, check spam for verification mail from the auth provider and confirm the email address is typed correctly.</li>
-      <li>If stuck on a browser page, see <a href="../auth/callback/">Sign-in return</a>.</li>
+      <li>If you cancel login or pick the wrong Google account, start sign-in again from CardScanR and choose the correct account.</li>
+      <li>After Google sign-in in the browser, return to the app. If the app does not open, use the OAuth return page deep link <code>cardscanr://login-callback</code> or reopen CardScanR.</li>
+      <li>For email sign-in, check spam for verification mail and confirm the email address is typed correctly.</li>
+      <li>If the browser returns without completing sign-in, close the tab, reopen CardScanR, and try again. See <a href="../auth/callback/">Sign-in return</a>.</li>
+      <li>Sign out in Settings does not delete your account or local collection data.</li>
+      <li>Contact support without sharing passwords or verification codes.</li>
     </ul>
 
-    <h2>Cloud sync help</h2>
+    <h2>Scanner help</h2>
     <ul>
-      <li>Collection data stays on-device until you explicitly opt in to cloud sync while signed in.</li>
-      <li>Sync uploads collection <strong>metadata</strong> — it does not upload card photographs from your camera.</li>
-      <li>If sync fails, note whether you are signed in, whether sync is enabled in Settings, and the app version from About, then email support.</li>
+      <li>Grant camera permission when prompted — without it, live scanning is unavailable (manual entry may still work).</li>
+      <li>Use good lighting and reduce glare; tilt the card slightly if reflections block the collector number.</li>
+      <li>Fill the on-screen guide with the card face; move closer when the collector number is hard to read.</li>
+      <li>If autofocus hunts repeatedly, hold steady, tap to focus if your device supports it, or try gallery import.</li>
+      <li>Gallery import: choose a clear, flat photo of the card.</li>
+      <li>Review OCR text and match suggestions before saving — correct errors in the review step.</li>
     </ul>
 
-    <h2>Account deletion</h2>
-    <p>See <a href="../delete-account/">Delete Account and Data</a> for in-app paths, email requests, and what is deleted versus retained. Sign out does not delete the account or remove local collection data.</p>
+    <h2>Collection and binder help</h2>
+    <ul>
+      <li><strong>Missing card images:</strong> Catalogue artwork loads from reference URLs; check your connection and try again.</li>
+      <li><strong>Incorrect card identity:</strong> Edit the entry or report via <a href="../feedback/">Feedback</a> with card, set, and collector number.</li>
+      <li><strong>Quantities and condition:</strong> Edit the item in your collection or binder view.</li>
+      <li><strong>Binder completion / missing targets:</strong> Confirm the binder template and that items are assigned to the correct slot.</li>
+      <li><strong>Offline / local data:</strong> Your inventory stays on-device by default; cloud sync is optional and opt-in.</li>
+      <li><strong>Cloud sync:</strong> When enabled while signed in, collection metadata syncs — not camera photographs.</li>
+    </ul>
 
-    <h2>Policies</h2>
-    <p><a href="../privacy/">Privacy Policy</a> · <a href="../terms/">Terms of Use</a> · <a href="../delete-account/">Delete Account and Data</a></p>
+    <h2>Pricing help</h2>
+    <ul>
+      <li>Displayed values are <strong>estimates</strong>, not offers to buy or sell and not financial advice.</li>
+      <li>The app shows the pricing source and freshness where available — stale prices may not reflect current market activity.</li>
+      <li>If a price looks wrong, note the card, set, source, and date shown, then report via <a href="../feedback/">Feedback</a>.</li>
+      <li>Do not make purchase or sale decisions based solely on in-app estimates.</li>
+    </ul>
+
+    <h2>Account and privacy</h2>
+    <p>
+      <a href="../privacy/">Privacy Policy</a> ·
+      <a href="../delete-account/">Delete account</a> ·
+      <a href="../feedback/">Feedback</a> ·
+      <a href="../terms/">Terms of Use</a>
+    </p>
+    <p>Account deletion instructions and processing expectations are on the deletion page. Email <a href="mailto:cardscanr.dev@gmail.com">cardscanr.dev@gmail.com</a> if in-app deletion is unavailable.</p>
+
+    <h2>What to include when you contact us</h2>
+    <ul>
+      <li>App name: CardScanR: TCG Card Scanner</li>
+      <li>Android package: <span class="package">com.cardscanr.app</span></li>
+      <li>App version from Settings → About</li>
+      <li>Device model and Android version</li>
+      <li>Whether you use Google or email sign-in</li>
+      <li>A clear description and steps to reproduce</li>
+    </ul>
   </main>
 
   <footer class="site-footer">
     <div class="footer-inner">
       <nav class="footer-nav" aria-label="Footer">
-        <a href="../">Home</a>
-        <a href="../privacy/">Privacy Policy</a>
-        <a href="../delete-account/">Delete Account</a>
-        <a href="../data-deletion/">Data Deletion</a>
+        <a href="../">CardScanR</a>
         <a href="../support/">Support</a>
-        <a href="../terms/">Terms of Use</a>
+        <a href="../feedback/">Feedback</a>
+        <a href="../privacy/">Privacy</a>
+        <a href="../terms/">Terms</a>
+        <a href="../delete-account/">Delete account</a>
       </nav>
-      <p class="footer-note">CardScanR: TCG Card Scanner · Package <span class="package">com.cardscanr.app</span><br>CardScanR is operated by Andrew Gore.</p>
+      <p class="footer-note">© <span data-year>2026</span> Andrew Gore · CardScanR: TCG Card Scanner · Package <span class="package">com.cardscanr.app</span><br>Pokémon and related marks are trademarks of their respective owners. CardScanR is not affiliated with Nintendo, Creatures, Game Freak, or eBay.</p>
     </div>
   </footer>
   <script src="../assets/js/site.js" defer></script>

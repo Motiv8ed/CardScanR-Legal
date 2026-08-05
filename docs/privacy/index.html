@@ -4,6 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Privacy Policy for CardScanR: TCG Card Scanner (com.cardscanr.app).">
+  <link rel="canonical" href="https://cardscanr.com/privacy/">
   <title>Privacy Policy · CardScanR</title>
   <link rel="icon" href="../assets/images/cardscanr_mark.png" type="image/png">
   <link rel="stylesheet" href="../assets/css/site.css">
@@ -19,11 +20,16 @@
           <span class="brand-tag">Legal &amp; Support</span>
         </span>
       </a>
-      <nav class="nav" aria-label="Primary">
-        <a href="../privacy/">Privacy</a>
-        <a href="../delete-account/">Delete account</a>
+      <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="site-nav" aria-label="Open menu">
+        <span class="nav-toggle-icon" aria-hidden="true"></span>
+      </button>
+      <nav class="nav" id="site-nav" aria-label="Primary">
+        <a href="../">Home</a>
         <a href="../support/">Support</a>
+        <a href="../feedback/">Feedback</a>
+        <a href="../privacy/">Privacy</a>
         <a href="../terms/">Terms</a>
+        <a href="../delete-account/">Delete account</a>
       </nav>
     </div>
   </header>
@@ -31,7 +37,7 @@
   <main id="main" class="site-main prose">
     <p class="eyebrow">Privacy</p>
     <h1>Privacy Policy for CardScanR: TCG Card Scanner</h1>
-    <p class="meta">Effective: 4 August 2026 · Last updated: 4 August 2026<br>
+    <p class="meta">Effective: 4 August 2026 · Last updated: 5 August 2026<br>
     App: CardScanR: TCG Card Scanner · Package: <span class="package">com.cardscanr.app</span></p>
 
     <div class="callout">
@@ -79,6 +85,25 @@
       <li><strong>Diagnostics and feedback (optional):</strong> You may choose to generate troubleshooting exports or send feedback. Those can include app state, scan evidence, pricing status, and device-local logs. Review anything you share before sending. Developer diagnostics should remain off unless you are intentionally collecting a support bundle.</li>
       <li><strong>Crash and analytics SDKs:</strong> The current app does not include Firebase Analytics, Crashlytics, Sentry, or advertising SDKs.</li>
     </ul>
+
+    <h2 id="website-feedback">6a. Website feedback form</h2>
+    <p>CardScanR provides a secure feedback form at <a href="../feedback/">cardscanr.com/feedback</a> for bugs, suggestions, and data-quality reports about the Android app. This section describes that form only (not in-app diagnostics exports).</p>
+    <h3>Information you may enter</h3>
+    <ul>
+      <li><strong>Required:</strong> feedback type, subject, and description.</li>
+      <li><strong>Optional:</strong> card name, set name, collector number, app version, Android version, device model, contact email, and steps to reproduce.</li>
+    </ul>
+    <p>Do not submit passwords, verification codes, payment card numbers, or government identifiers through the form.</p>
+    <h3>Purpose</h3>
+    <p>We use website feedback to investigate issues, prioritise improvements, and correct catalogue or pricing problems you report. Feedback may be used to improve CardScanR features and data quality.</p>
+    <h3>Anti-abuse processing</h3>
+    <p>Submissions pass through a validated server endpoint with size limits and duplicate protection. To reduce spam and abuse, we may derive short-lived rate-limit keys from request metadata using an HMAC with a private rotating salt. We do not permanently store raw IP addresses for this purpose. Derived keys and related anti-abuse logs are kept only as long as needed for rate limiting and security review, then discarded or aggregated.</p>
+    <h3>Cloudflare Turnstile</h3>
+    <p>The feedback page uses Cloudflare Turnstile to help block automated abuse. Turnstile may process browser signals under Cloudflare’s policies. We validate the Turnstile token server-side before accepting a submission.</p>
+    <h3>Supabase storage and processing</h3>
+    <p>Accepted feedback is stored in the CardScanR Supabase project through a dedicated Edge Function. The public website uses only publishable client credentials; service-role keys are not exposed in the browser. Feedback rows are not readable or writable by anonymous browser clients directly.</p>
+    <h3>Retention and deletion</h3>
+    <p>Feedback is retained as needed to handle your report, track resolution, and improve the product. Retention periods may vary by status and operational need. To request access, correction, or deletion of feedback you submitted, contact <a href="mailto:cardscanr.dev@gmail.com">cardscanr.dev@gmail.com</a> with your public reference ID if you have one. We will respond consistent with applicable privacy rights; deletion may take time where backups or legal holds apply.</p>
 
     <h2>7. Purposes for processing</h2>
     <ul>
@@ -149,14 +174,14 @@
   <footer class="site-footer">
     <div class="footer-inner">
       <nav class="footer-nav" aria-label="Footer">
-        <a href="../">Home</a>
-        <a href="../privacy/">Privacy Policy</a>
-        <a href="../delete-account/">Delete Account</a>
-        <a href="../data-deletion/">Data Deletion</a>
+        <a href="../">CardScanR</a>
         <a href="../support/">Support</a>
-        <a href="../terms/">Terms of Use</a>
+        <a href="../feedback/">Feedback</a>
+        <a href="../privacy/">Privacy</a>
+        <a href="../terms/">Terms</a>
+        <a href="../delete-account/">Delete account</a>
       </nav>
-      <p class="footer-note">CardScanR: TCG Card Scanner · Package <span class="package">com.cardscanr.app</span><br>CardScanR is operated by Andrew Gore.</p>
+      <p class="footer-note">© <span data-year>2026</span> Andrew Gore · CardScanR: TCG Card Scanner · Package <span class="package">com.cardscanr.app</span><br>Pokémon and related marks are trademarks of their respective owners. CardScanR is not affiliated with Nintendo, Creatures, Game Freak, or eBay.</p>
     </div>
   </footer>
   <script src="../assets/js/site.js" defer></script>

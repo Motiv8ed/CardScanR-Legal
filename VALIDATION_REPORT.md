@@ -1,9 +1,9 @@
 # Validation Report
 
-- Generated: 2026-08-04 03:47:20Z
+- Generated: 2026-08-05 05:46:26Z
 - Result: **PASSED**
 - Docs root: `D:\CardScanR-Legal\docs`
-- Pages checked: 8
+- Pages checked: 9
 
 ## Pages
 
@@ -11,6 +11,7 @@
 - `auth/callback/index.html`
 - `data-deletion/index.html`
 - `delete-account/index.html`
+- `feedback/index.html`
 - `index.html`
 - `privacy/index.html`
 - `support/index.html`
@@ -23,7 +24,7 @@
 ## Notes
 
 - .well-known/assetlinks.json: 1 sha256_cert_fingerprints present (upload/test certs only until Play App Signing fingerprint is added — see DEPLOYMENT.md)
-- CNAME.pending ready for rename when DNS is confirmed
+- CNAME.pending present with cardscanr.com
 - SHA-256 docs/assets/images/cardscanr_mark.png = 27E87B85B216CD7E1A820B573352D064392D6B50036301A11C4230ABF6D11589
 - SHA-256 docs/assets/images/cardscanr_logo.png = DAC4F021C1D204861F51BBB15C24D242592BECA8182503FA7989E62FC5783D07
 

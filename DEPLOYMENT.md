@@ -1,19 +1,52 @@
-# Deployment — CardScanR-Legal (GitHub Pages)
+# Deployment — CardScanR-Legal
 
-Zero-cost static site for CardScanR legal, support, OAuth return, and Android
-App Links verification. No paid hosting.
+Zero-cost static site for CardScanR legal, support, feedback, OAuth return, and
+Android App Links verification.
 
-## Live public URLs (GitHub Pages — working now)
+## Live custom domain (Cloudflare Pages — primary)
 
-Relative links are used throughout `docs/`, so the site works on the project
-Pages URL:
+**Project:** `cardscanr-www` (Cloudflare Pages, free tier)
+
+Production URLs (canonical):
+
+- https://cardscanr.com/
+- https://cardscanr.com/support/
+- https://cardscanr.com/feedback/
+- https://cardscanr.com/privacy/
+- https://cardscanr.com/terms/
+- https://cardscanr.com/delete-account/
+- https://cardscanr.com/data-deletion/
+- https://cardscanr.com/auth/callback/
+- https://cardscanr.com/beta/ (merged from beta worktree at deploy)
+- https://cardscanr.com/.well-known/assetlinks.json
+
+Build and deploy:
+
+```bash
+python scripts/validate_legal_site.py
+node scripts/deploy_to_cloudflare_pages.mjs          # builds dist/ only
+node scripts/deploy_to_cloudflare_pages.mjs --deploy # builds dist/ + wrangler pages deploy
+```
+
+The deploy script copies `docs/*` into `dist/`, merges beta assets from
+`D:\CardScanR_worktrees\public_beta_signup_foundation_20260805\public_website\beta`
+(and `assets/css/beta.css`, `assets/js/beta.js`, `assets/js/config.js`) without
+overwriting `site.css` / `site.js`, and writes merged `_headers` / `_redirects`.
+
+**Do not create `docs/CNAME` while Cloudflare Pages owns the apex domain.** Keep
+`docs/CNAME.pending` in the repository for documentation; GitHub Pages fallback
+continues to work without a CNAME file.
+
+## GitHub Pages fallback
+
+Relative links throughout `docs/` keep the site working on the project path:
 
 - https://motiv8ed.github.io/CardScanR-Legal/
+- https://motiv8ed.github.io/CardScanR-Legal/support/
+- https://motiv8ed.github.io/CardScanR-Legal/feedback/
 - https://motiv8ed.github.io/CardScanR-Legal/privacy/
 - https://motiv8ed.github.io/CardScanR-Legal/terms/
-- https://motiv8ed.github.io/CardScanR-Legal/support/
 - https://motiv8ed.github.io/CardScanR-Legal/delete-account/
-- https://motiv8ed.github.io/CardScanR-Legal/data-deletion/
 - https://motiv8ed.github.io/CardScanR-Legal/auth/callback/
 - https://motiv8ed.github.io/CardScanR-Legal/.well-known/assetlinks.json
 
@@ -22,89 +55,25 @@ Default branch: `master`
 Pages source: `master` / `/docs`  
 `docs/.nojekyll` is present so GitHub Pages serves `.well-known/` as static files.
 
-## Desired custom domain (OWNER ACTION — do not enable until DNS works)
+The `/beta/` path is not in `docs/`; it appears only after Cloudflare deploy merge
+or on the live custom domain.
 
-Desired apex: **cardscanr.com**  
-Desired www: **www.cardscanr.com**
+## Play Console URLs (cardscanr.com)
 
-### Do not create `docs/CNAME` yet
+Use these once the custom domain is verified live:
 
-Creating `docs/CNAME` before DNS is correctly pointed will break
-`motiv8ed.github.io/CardScanR-Legal` URLs.
+| Field | URL |
+| ----- | --- |
+| Website | https://cardscanr.com |
+| Privacy policy | https://cardscanr.com/privacy/ |
+| Feedback | https://cardscanr.com/feedback/ |
+| Support | https://cardscanr.com/support/ |
+| Account deletion | https://cardscanr.com/delete-account/ |
+| Data deletion alias | https://cardscanr.com/data-deletion/ |
+| OAuth return | https://cardscanr.com/auth/callback/ |
+| App Links | https://cardscanr.com/.well-known/assetlinks.json |
 
-A pending file is ready:
-
-- `docs/CNAME.pending` contains `cardscanr.com`
-
-**When DNS is confirmed working**, rename:
-
-```text
-docs/CNAME.pending  →  docs/CNAME
-```
-
-Then commit/push and set the custom domain in GitHub → Settings → Pages.
-
-### DNS options (OWNER ACTION)
-
-#### Option A — Apex A records + www CNAME (GitHub Pages)
-
-At your DNS host for `cardscanr.com`, create:
-
-| Type  | Name | Value                 |
-| ----- | ---- | --------------------- |
-| A     | `@`  | `185.199.108.153`     |
-| A     | `@`  | `185.199.109.153`     |
-| A     | `@`  | `185.199.110.153`     |
-| A     | `@`  | `185.199.111.153`     |
-| CNAME | `www`| `motiv8ed.github.io`  |
-
-Then in GitHub Pages settings, set custom domain to `cardscanr.com` and enable
-HTTPS once GitHub issues the certificate.
-
-#### Option B — Cloudflare proxy to GitHub Pages
-
-1. Add `cardscanr.com` to Cloudflare (or use an existing zone).
-2. Point DNS at GitHub Pages (same A records / www CNAME as above, or a
-   Cloudflare CNAME setup that targets `motiv8ed.github.io`).
-3. SSL/TLS mode: **Full** (not Flexible) once GitHub HTTPS is ready.
-4. Only enable proxy (orange cloud) after you understand cache/HTTPS behaviour
-   for `.well-known` and OAuth return paths.
-5. Still rename `docs/CNAME.pending` → `docs/CNAME` only after DNS resolves
-   correctly to GitHub Pages.
-
-### Final URLs after custom domain is live
-
-- https://cardscanr.com/
-- https://cardscanr.com/privacy/
-- https://cardscanr.com/terms/
-- https://cardscanr.com/support/
-- https://cardscanr.com/delete-account/
-- https://cardscanr.com/data-deletion/
-- https://cardscanr.com/auth/callback/
-- https://cardscanr.com/.well-known/assetlinks.json
-- https://www.cardscanr.com/… (same paths, once www is configured)
-
-Play Console and OAuth redirect URIs should be updated to the custom-domain
-URLs when DNS is ready. Keep github.io URLs working until then.
-
-## Play Console URLs (current github.io)
-
-Privacy Policy:
-
-`https://motiv8ed.github.io/CardScanR-Legal/privacy/`
-
-Account deletion:
-
-`https://motiv8ed.github.io/CardScanR-Legal/delete-account/`
-
-Optional alias:
-
-`https://motiv8ed.github.io/CardScanR-Legal/data-deletion/`
-
-OAuth / App Links (after domain cutover, prefer cardscanr.com equivalents):
-
-`https://motiv8ed.github.io/CardScanR-Legal/auth/callback/`  
-`https://motiv8ed.github.io/CardScanR-Legal/.well-known/assetlinks.json`
+Until DNS cutover is complete, github.io URLs remain valid fallbacks (see list above).
 
 ## Android Digital Asset Links (`assetlinks.json`)
 
@@ -133,7 +102,7 @@ Until that fingerprint is added, treat App Links on Play builds as incomplete.
 
 ## Maintain / redeploy
 
-1. Edit files under `docs/` (or supporting markdown) in this repository only.
+1. Edit files under `docs/` (or supporting scripts) in this repository only.
 2. Run:
 
 ```bash
@@ -141,21 +110,21 @@ python scripts/validate_legal_site.py
 ```
 
 3. Ensure exit code **0**.
-4. Commit on `master` and push to `origin` (only when intentionally publishing).
-5. Wait for GitHub Pages to refresh, then re-check the live URLs over HTTPS.
+4. For Cloudflare production: `node scripts/deploy_to_cloudflare_pages.mjs --deploy`
+5. For GitHub Pages fallback: commit on `master` and push to `origin` when intentionally publishing.
 
-### Pages settings
+### GitHub Pages settings (fallback)
 
 1. Repo **Settings → Pages**
 2. Source: **Deploy from a branch**
 3. Branch: **master**
 4. Folder: **/docs**
-5. Custom domain: leave empty until DNS is ready and `docs/CNAME` exists
+5. Custom domain: leave empty while Cloudflare Pages serves `cardscanr.com`
 
 ## Safety reminders
 
-- Never commit Supabase service role keys, OAuth client secrets, or reviewer passwords.
+- Never commit Supabase service role keys, OAuth client secrets, or Turnstile secret keys.
+- Publishable Supabase anon key and Turnstile site key in `feedback-config.js` are intentional.
 - Do not point Pages at anything outside `docs/`.
-- Do not create `docs/CNAME` until the owner confirms DNS for `cardscanr.com`.
-- Do not enable paid hosting or paid DNS products for this site.
+- Do not create `docs/CNAME` until the owner confirms GitHub Pages should own the domain again.
 - Re-run validation after every public HTML or Asset Links edit.

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Submit bugs, suggestions, and data corrections for CardScanR: TCG Card Scanner.">
+  <link rel="canonical" href="https://cardscanr.com/feedback/">
+  <title>Feedback · CardScanR</title>
+  <link rel="icon" href="../assets/images/cardscanr_mark.png" type="image/png">
+  <link rel="stylesheet" href="../assets/css/site.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="../">
+        <img src="../assets/images/cardscanr_mark.png" width="40" height="40" alt="">
+        <span class="brand-text">
+          <span class="brand-name">CardScanR</span>
+          <span class="brand-tag">Legal &amp; Support</span>
+        </span>
+      </a>
+      <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="site-nav" aria-label="Open menu">
+        <span class="nav-toggle-icon" aria-hidden="true"></span>
+      </button>
+      <nav class="nav" id="site-nav" aria-label="Primary">
+        <a href="../">Home</a>
+        <a href="../support/">Support</a>
+        <a href="../feedback/">Feedback</a>
+        <a href="../privacy/">Privacy</a>
+        <a href="../terms/">Terms</a>
+        <a href="../delete-account/">Delete account</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" class="site-main prose">
+    <p class="eyebrow">Feedback</p>
+    <h1>Report a bug or suggest an improvement</h1>
+    <p class="lede">Use this secure form for bugs, feature ideas, incorrect card matches, missing sets, pricing issues, and scanner problems. For general how-to help, see <a href="../support/">Support</a>.</p>
+    <p><a href="../support/">Looking for help instead?</a></p>
+
+    <div class="callout warn">
+      <strong>Do not submit secrets.</strong>
+      <p>Never include passwords, verification codes, recovery codes, payment card numbers, or government identifiers. Describe the issue in plain language only.</p>
+    </div>
+
+    <div id="form-success" class="form-success" hidden tabindex="-1">
+      <strong>Thank you — your feedback was received.</strong>
+      <p>Reference: <span id="success-reference"></span>. Keep this reference if you follow up by email.</p>
+      <p><a href="../support/">Return to Support</a></p>
+    </div>
+
+    <div id="form-failure" class="form-failure" hidden tabindex="-1">
+      <strong>We could not send your feedback.</strong>
+      <p>Please check required fields and the security check, then try again. If the problem continues, email <a href="mailto:cardscanr.dev@gmail.com">cardscanr.dev@gmail.com</a> with a short description of the issue.</p>
+    </div>
+
+    <div id="error-summary" class="error-summary" hidden tabindex="-1" role="alert" aria-live="polite">
+      <strong>Please fix the following:</strong>
+      <ul id="error-list"></ul>
+    </div>
+
+    <form id="feedback-form" class="form-stack" action="#" method="post" novalidate>
+      <div class="field">
+        <label for="feedback_type">Feedback type <span class="required-marker" aria-hidden="true">*</span></label>
+        <select id="feedback_type" name="feedback_type" required aria-required="true">
+          <option value="">Select a type…</option>
+          <option value="bug_crash">Bug or crash</option>
+          <option value="feature_suggestion">Feature suggestion</option>
+          <option value="incorrect_card_match">Incorrect card match</option>
+          <option value="missing_card_or_set">Missing card or set</option>
+          <option value="incorrect_market_price">Incorrect market price</option>
+          <option value="scanner_ocr">Scanner/OCR issue</option>
+          <option value="collection_binder">Collection or binder issue</option>
+          <option value="login_account">Login/account issue</option>
+          <option value="other">Other</option>
+        </select>
+        <p class="field-error" data-error-for="feedback_type" hidden></p>
+      </div>
+
+      <div class="field">
+        <label for="subject">Subject <span class="required-marker" aria-hidden="true">*</span></label>
+        <input type="text" id="subject" name="subject" maxlength="120" required aria-required="true" autocomplete="off">
+        <p class="char-count" id="subject-count" aria-live="polite">0 / 120</p>
+        <p class="field-error" data-error-for="subject" hidden></p>
+      </div>
+
+      <div class="field">
+        <label for="description">Description <span class="required-marker" aria-hidden="true">*</span></label>
+        <textarea id="description" name="description" maxlength="4000" rows="6" required aria-required="true"></textarea>
+        <p class="field-hint">What happened, what you expected, and any context that helps us understand the issue.</p>
+        <p class="char-count" id="description-count" aria-live="polite">0 / 4000</p>
+        <p class="field-error" data-error-for="description" hidden></p>
+      </div>
+
+      <div class="field">
+        <label for="reproduction_steps">Steps to reproduce</label>
+        <textarea id="reproduction_steps" name="reproduction_steps" maxlength="2000" rows="4"></textarea>
+        <p class="char-count" id="reproduction-count" aria-live="polite">0 / 2000</p>
+        <p class="field-error" data-error-for="reproduction_steps" hidden></p>
+      </div>
+
+      <h2>Optional card details</h2>
+      <p class="field-hint">Helpful for match, catalogue, or pricing reports.</p>
+
+      <div class="field">
+        <label for="card_name">Card name</label>
+        <input type="text" id="card_name" name="card_name" maxlength="200" autocomplete="off">
+      </div>
+
+      <div class="field">
+        <label for="set_name">Set name</label>
+        <input type="text" id="set_name" name="set_name" maxlength="200" autocomplete="off">
+      </div>
+
+      <div class="field">
+        <label for="collector_number">Collector number</label>
+        <input type="text" id="collector_number" name="collector_number" maxlength="40" autocomplete="off">
+      </div>
+
+      <h2>Optional device and contact details</h2>
+
+      <div class="field">
+        <label for="app_version">App version</label>
+        <input type="text" id="app_version" name="app_version" maxlength="40" placeholder="From Settings → About" autocomplete="off">
+      </div>
+
+      <div class="field">
+        <label for="android_version">Android version</label>
+        <input type="text" id="android_version" name="android_version" maxlength="20" autocomplete="off">
+      </div>
+
+      <div class="field">
+        <label for="device_model">Device model</label>
+        <input type="text" id="device_model" name="device_model" maxlength="80" autocomplete="off">
+      </div>
+
+      <div class="field">
+        <label for="contact_email">Contact email</label>
+        <input type="email" id="contact_email" name="contact_email" maxlength="254" autocomplete="email" inputmode="email">
+        <p class="field-hint">Optional. Provide an email if you want a reply. We use it only to follow up on this feedback.</p>
+        <p class="field-error" data-error-for="contact_email" hidden></p>
+      </div>
+
+      <div class="turnstile-slot">
+        <div id="turnstile-widget"></div>
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" class="btn btn-primary" id="feedback-submit">Submit feedback</button>
+      </div>
+
+      <p class="form-privacy">By submitting, you agree that CardScanR may store and process your feedback to investigate issues and improve the app. See our <a href="../privacy/#website-feedback">Privacy Policy</a> for retention, anti-abuse processing, and contact details.</p>
+    </form>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <nav class="footer-nav" aria-label="Footer">
+        <a href="../">CardScanR</a>
+        <a href="../support/">Support</a>
+        <a href="../feedback/">Feedback</a>
+        <a href="../privacy/">Privacy</a>
+        <a href="../terms/">Terms</a>
+        <a href="../delete-account/">Delete account</a>
+      </nav>
+      <p class="footer-note">© <span data-year>2026</span> Andrew Gore · CardScanR: TCG Card Scanner · Package <span class="package">com.cardscanr.app</span><br>Pokémon and related marks are trademarks of their respective owners. CardScanR is not affiliated with Nintendo, Creatures, Game Freak, or eBay.</p>
+    </div>
+  </footer>
+  <script src="../assets/js/site.js" defer></script>
+  <script src="../assets/js/feedback-config.js" defer></script>
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+  <script src="../assets/js/feedback.js" defer></script>
+</body>
+</html>
