@@ -5,6 +5,17 @@
 (function () {
   "use strict";
 
+  // Canonical host: redirect www → apex over HTTPS.
+  if (window.location.hostname === "www.cardscanr.com") {
+    var target =
+      "https://cardscanr.com" +
+      window.location.pathname +
+      window.location.search +
+      window.location.hash;
+    window.location.replace(target);
+    return;
+  }
+
   document.documentElement.classList.add("js");
 
   var yearEls = document.querySelectorAll("[data-year]");
