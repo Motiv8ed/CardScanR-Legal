@@ -13,8 +13,7 @@ const DOCS = join(ROOT, "docs");
 const DIST = join(ROOT, "dist");
 const BETA_WORKTREE = join(
   "D:",
-  "CardScanR_worktrees",
-  "public_beta_signup_foundation_20260805",
+  "CardScanR",
   "public_website"
 );
 
@@ -34,9 +33,9 @@ function copyBetaAssets() {
   const betaDist = join(DIST, "beta");
   if (existsSync(betaSrc)) {
     cpSync(betaSrc, betaDist, { recursive: true });
-    console.log("Copied beta/ from worktree");
+    console.log("Copied beta/ from D:\\CardScanR\\public_website");
   } else {
-    console.warn("Beta worktree not found — dist will omit /beta/ until worktree is available");
+    console.warn("Canonical public_website beta assets not found — dist will omit /beta/ until worktree is available");
   }
 
   for (const rel of [

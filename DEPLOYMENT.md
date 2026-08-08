@@ -17,7 +17,7 @@ Production URLs (canonical):
 - https://cardscanr.com/delete-account/
 - https://cardscanr.com/data-deletion/
 - https://cardscanr.com/auth/callback/
-- https://cardscanr.com/beta/ (merged from beta worktree at deploy)
+- https://cardscanr.com/beta/ (merged from D:\CardScanR\public_website at deploy)
 - https://cardscanr.com/.well-known/assetlinks.json
 
 Build and deploy:
@@ -29,7 +29,7 @@ node scripts/deploy_to_cloudflare_pages.mjs --deploy # builds dist/ + wrangler p
 ```
 
 The deploy script copies `docs/*` into `dist/`, merges beta assets from
-`D:\CardScanR_worktrees\public_beta_signup_foundation_20260805\public_website\beta`
+`D:\CardScanR\public_website\beta`
 (and `assets/css/beta.css`, `assets/js/beta.js`, `assets/js/config.js`) without
 overwriting `site.css` / `site.js`, and writes merged `_headers` / `_redirects`.
 
