@@ -37,12 +37,17 @@
   <main id="main" class="site-main prose">
     <p class="eyebrow">Privacy</p>
     <h1>Privacy Policy for CardScanR: TCG Card Scanner</h1>
-    <p class="meta">Effective: 4 August 2026 · Last updated: 5 August 2026<br>
+    <p class="meta">Effective: 4 August 2026 · Last updated: 19 August 2026<br>
     App: CardScanR: TCG Card Scanner · Package: <span class="package">com.cardscanr.app</span></p>
 
     <div class="callout">
+      <strong>Related trust pages</strong>
+      <p>Plain English summaries: <a href="../data/">Your data</a> · <a href="../security/">Security</a> · <a href="https://cardscanr.com/trust/">Trust hub</a></p>
+    </div>
+
+    <div class="callout">
       <strong>Australian privacy context</strong>
-      <p>CardScanR is operated from Australia. This policy is written with the Australian Privacy Principles (APPs) under the Privacy Act 1988 (Cth) in mind for how we describe collection, use, disclosure, access, correction, and deletion. It is information about our practices — not legal advice, and not a guarantee of compliance with every applicable law in every jurisdiction.</p>
+      <p>CardScanR is operated from Australia. This policy is written with the Australian Privacy Principles (APPs) under the Privacy Act 1988 (Cth) in mind for how we describe collection, use, disclosure, access, correction, and deletion. It is information about our practices, not legal advice, and not a guarantee of compliance with every applicable law in every jurisdiction.</p>
     </div>
 
     <h2>1. Who operates CardScanR</h2>
@@ -64,7 +69,8 @@
     <p>When signed in, the app may store a cloud profile (for example display name, country code, currency code, pricing market preferences, main use case, TCG interests, and onboarding completion status).</p>
 
     <h3>Opt-in cloud sync of collection metadata</h3>
-    <p>Card inventory is stored in a local database on your device by default. Cloud sync of collection metadata is <strong>opt-in</strong>: it only runs when you are signed in and you explicitly enable sync in the app (and when the build allows it). Synced records can include card identity fields, condition, quantity, purchase and estimate fields, notes, tags, catalogue image URLs, and related collection metadata. <strong>Collection sync does not upload card photographs</strong> from your camera or gallery.</p>
+    <p>Card inventory is stored in a local database on your device by default. Cloud sync of collection metadata is <strong>opt-in</strong>: it only runs when you are signed in and you explicitly enable sync in the app (and when the build allows it). Synced records can include card identity fields, condition, quantity, purchase and estimate fields, tags, catalogue image URLs, acquisition source text, and related collection metadata. <strong>Collection sync does not upload card photographs</strong> from your camera or gallery.</p>
+    <p>In the official Flutter app and web companion, collection item notes are sent as null during sync. Notes are intended to stay on your device. Acquisition source text can sync when cloud sync is enabled.</p>
 
     <h3>Scan session metadata</h3>
     <p>When signed in, the app may save scan session metadata to the cloud (for example scan mode, source, status, counts, and OCR text excerpts). That is metadata about scanning activity, not an upload of full card photographs through collection sync.</p>
@@ -73,7 +79,7 @@
     <p>CardScanR requests camera permission when you open scanning. You may also choose images from your gallery via the system picker.</p>
     <p><strong>On-device processing:</strong> Camera frames and selected images are processed on the device for OCR and card matching (including Google ML Kit Text Recognition and OpenCV processing). Recognition work for scanning is designed to stay on-device.</p>
     <p><strong>No photo upload via collection sync:</strong> Enabling cloud collection sync uploads collection <em>metadata</em>, not your card photos. Catalogue artwork shown in the app is typically downloaded from catalogue or image hosts as reference URLs, not copies of your camera captures.</p>
-    <p>Optional diagnostics or feedback you deliberately export may include scan evidence you choose to share — see below. We do not claim that local frames are encrypted at rest, anonymised, or retained for a fixed period on the device.</p>
+    <p>Optional diagnostics or feedback you deliberately export may include scan evidence you choose to share; see below. We do not claim that local frames are encrypted at rest, anonymised, or retained for a fixed period on the device.</p>
 
     <h2>5. Market price and catalogue requests</h2>
     <p>To match cards and show estimated market values, the app may send card identity queries (such as name, set, collector number, language, or variant) to third-party or backend services, including catalogue APIs and any configured CardScanR pricing backend. Those requests are for informational estimates only. Pricing figures are not financial advice.</p>
@@ -127,14 +133,22 @@
     <h2>9. Third-party service providers</h2>
     <p>Depending on features you use, providers may include Supabase (authentication and database), Google (sign-in and on-device ML Kit), catalogue and pricing APIs, and any configured CardScanR pricing or image hosting backends. Each provider processes data under its own policies.</p>
 
-    <h2>10. Data sharing</h2>
-    <p>We do not sell personal information. Data is shared with service providers only as needed to operate CardScanR (authentication, sync, catalogue, and pricing lookups), or if required by law. Card identity queries sent to catalogue and pricing APIs are necessary to return match and price estimates.</p>
+    <h2>10. Data sharing, advertising, and sale</h2>
+    <p>We do not sell personal information or collection data. We do not use your collection for advertising. No advertising SDKs, Facebook Pixel, Google Ads, or behavioural ad profiling were found in the CardScanR app or public website source reviewed for this policy.</p>
+    <p>Data is shared with service providers only as needed to operate CardScanR (authentication, sync, catalogue, and pricing lookups), or if required by law. Card identity queries sent to catalogue and pricing APIs are necessary to return match and price estimates.</p>
+
+    <h2>10a. AI and model training</h2>
+    <p>No customer-data model-training pipeline was found. CardScanR policy: customer data is not used to train CardScanR or third-party AI models unless a future separate opt-in exists. That training path is currently disabled.</p>
+    <p>On-device OCR (Google ML Kit) runs locally for scanning. It is separate from uploading your collection to train a cloud model.</p>
+
+    <h2>10b. Google Play Billing</h2>
+    <p>Premium subscriptions are purchased inside the Android app through Google Play Billing. Google processes payment. CardScanR receives purchase verification and entitlement status from Google Play, not your full payment card number.</p>
 
     <h2>11. International processing</h2>
     <p>Supabase and other providers may process data in data centres outside Australia. If that is material to you, contact us before enabling cloud features.</p>
 
     <h2>12. Security</h2>
-    <p>The app uses HTTPS for network calls and Supabase client keys intended for publishable client use. No security measure is perfect. Do not email passwords or payment secrets to support.</p>
+    <p>The app uses HTTPS for network calls and Supabase client keys intended for publishable client use. No security measure is perfect. Do not email passwords or payment secrets to support. See <a href="../security/">Security</a> for more detail on protections and limits.</p>
 
     <h2>13. Retention</h2>
     <p>Local data remains on your device until you clear app storage, uninstall, or overwrite it. Cloud account, profile, and opted-in collection metadata remain until deleted through a supported deletion process or otherwise removed by the operator. Optional diagnostics you send are retained only as needed to handle your request.</p>
@@ -142,10 +156,11 @@
     <h2>14. Account and data deletion</h2>
     <p>You can request deletion of your CardScanR account and associated cloud data:</p>
     <ul>
-      <li><strong>In the app</strong> — Settings pathways that open the hosted deletion instructions or, when the in-app deletion Edge Function is live, signed-in delete controls</li>
-      <li><strong>On this website</strong> — the <a href="../delete-account/">Delete Account and Data</a> page</li>
-      <li><strong>By email</strong> — <a href="mailto:cardscanr.dev@gmail.com">cardscanr.dev@gmail.com</a> (monitored fallback)</li>
+      <li><strong>In the app:</strong> signed-in delete controls through the live delete-account Edge Function, or Settings pathways that open the hosted deletion instructions</li>
+      <li><strong>On this website:</strong> the <a href="../delete-account/">Delete Account and Data</a> page</li>
+      <li><strong>By email:</strong> <a href="mailto:cardscanr.dev@gmail.com">cardscanr.dev@gmail.com</a> (monitored fallback)</li>
     </ul>
+    <p>You can also delete cloud collection data through the server purge RPC (<code>customer_purge_cloud_collection_data</code>) with same-user auth checks; in-app UI for this action is being added.</p>
     <p>Subject to verification, a request is intended to cover the authentication account, profile, customer collection items synced to the cloud, binders and memberships where stored server-side, sync preferences/operations, and associated feedback or beta-program records where present. Local device data is separate and may remain unless you clear storage or uninstall. Sign out does not delete the account. See the deletion page for processing expectations and what may be retained (backups, legal holds).</p>
 
     <h2>15. Your choices and rights</h2>
@@ -155,6 +170,7 @@
       <li>Leave cloud sync off (default) or disable it after opt-in</li>
       <li>Decline optional diagnostics and feedback</li>
       <li>Sign out (local data remains)</li>
+      <li>Export your collection using CSV export and local backup in the Android app (JSON export being added)</li>
       <li>Request account and cloud data deletion via <a href="../delete-account/">Delete Account and Data</a> or support email</li>
       <li>Request access or correction of personal information we hold, consistent with applicable APP rights</li>
     </ul>
@@ -178,6 +194,8 @@
         <a href="../support/">Support</a>
         <a href="../feedback/">Feedback</a>
         <a href="../privacy/">Privacy</a>
+        <a href="../data/">Data</a>
+        <a href="../security/">Security</a>
         <a href="../terms/">Terms</a>
         <a href="../delete-account/">Delete account</a>
       </nav>

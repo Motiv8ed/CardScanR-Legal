@@ -1,0 +1,6 @@
+Contact: mailto:cardscanr.dev@gmail.com
+Policy: https://cardscanr.com/security/
+Acknowledgments: https://cardscanr.com/security/
+Preferred-Languages: en, en-AU
+Canonical: https://cardscanr.com/.well-known/security.txt
+Expires: 2027-08-19T00:00:00.000Z
