@@ -7,30 +7,35 @@
   <link rel="canonical" href="https://cardscanr.com/">
   <meta name="robots" content="index,follow">
   <title>CardScanR Legal &amp; Support</title>
-  <link rel="icon" href="assets/images/cardscanr_mark.png" type="image/png">
-  <link rel="stylesheet" href="assets/css/site.css">
+  <link rel="icon" href="/assets/images/cardscanr_mark.png" type="image/png">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;650;700&family=Sora:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/assets/css/site.css">
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
   <header class="site-header">
-    <div class="header-inner">
-      <a class="brand" href="./">
-        <img src="assets/images/cardscanr_mark.png" width="40" height="40" alt="">
-        <span class="brand-text">
-          <span class="brand-name">CardScanR</span>
-          <span class="brand-tag">Legal &amp; Support</span>
-        </span>
+    <div class="site-header__inner">
+      <a class="brand" href="/">
+        <img src="/assets/images/cardscanr_mark.png" width="36" height="36" alt="" />
+        CardScanR
       </a>
       <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="site-nav" aria-label="Open menu">
-        <span class="nav-toggle-icon" aria-hidden="true"></span>
+        <span class="nav-toggle-bars" aria-hidden="true"></span>
       </button>
-      <nav class="nav" id="site-nav" aria-label="Primary">
-        <a href="./">Home</a>
-        <a href="support/">Support</a>
-        <a href="feedback/">Feedback</a>
-        <a href="privacy/">Privacy</a>
-        <a href="terms/">Terms</a>
-        <a href="delete-account/">Delete account</a>
+      <nav class="site-nav" id="site-nav" aria-label="Primary">
+        <div class="site-nav__links">
+          <a href="/">Home</a>
+          <a href="/beta/">Beta</a>
+          <a href="/pricing/">Pricing</a>
+          <a href="/trust/">Trust</a>
+          <a href="/support/">Support</a>
+        </div>
+        <div class="site-nav__actions">
+          <a class="btn btn--ghost" href="/app/">Sign in</a>
+          <a class="btn btn--primary" href="/beta/#apply">Join the Beta</a>
+        </div>
       </nav>
     </div>
   </header>
@@ -40,7 +45,7 @@
       <img class="hero-brand" src="assets/images/cardscanr_logo.png" width="280" height="84" alt="CardScanR">
       <p class="eyebrow">Legal &amp; support</p>
       <h1 id="page-title">CardScanR: TCG Card Scanner</h1>
-      <p class="lede">Official privacy, account deletion, support, feedback, and terms pages for the CardScanR Android app (<span class="package">com.cardscanr.app</span>). Get help with the closed beta, sign-in, scanning, and collection tools — or send secure feedback.</p>
+      <p class="lede">Official privacy, account deletion, support, feedback, and terms pages for the CardScanR Android app (<span class="package">com.cardscanr.app</span>). Get help with the closed beta, sign-in, scanning, and collection tools  -  or send secure feedback.</p>
       <p class="meta">CardScanR is operated by Andrew Gore.</p>
     </section>
 
@@ -89,19 +94,50 @@
     </div>
   </main>
 
-  <footer class="site-footer">
-    <div class="footer-inner">
-      <nav class="footer-nav" aria-label="Footer">
-        <a href="./">CardScanR</a>
-        <a href="support/">Support</a>
-        <a href="feedback/">Feedback</a>
-        <a href="privacy/">Privacy</a>
-        <a href="terms/">Terms</a>
-        <a href="delete-account/">Delete account</a>
-      </nav>
-      <p class="footer-note">© <span data-year>2026</span> Andrew Gore · CardScanR: TCG Card Scanner · Package <span class="package">com.cardscanr.app</span><br>Pokémon and related marks are trademarks of their respective owners. CardScanR is not affiliated with Nintendo, Creatures, Game Freak, or eBay.</p>
+    <footer class="site-footer">
+    <div class="section-inner">
+      <div class="site-footer__grid">
+        <div>
+          <a class="brand" href="/">
+            <img src="/assets/images/cardscanr_mark.png" width="36" height="36" alt="" />
+            CardScanR
+          </a>
+          <p>Australian-built Pokemon collection platform. Scan on Android. Manage and share on web.</p>
+        </div>
+        <div>
+          <h2>Product</h2>
+          <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/pricing/">Pricing</a></li>
+            <li><a href="/beta/">Beta</a></li>
+            <li><a href="/app/">Web app</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2>Trust</h2>
+          <ul>
+            <li><a href="/trust/">Trust</a></li>
+            <li><a href="/data/">Data</a></li>
+            <li><a href="/security/">Security</a></li>
+            <li><a href="/privacy/">Privacy</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2>Support</h2>
+          <ul>
+            <li><a href="/support/">Support</a></li>
+            <li><a href="/feedback/">Feedback</a></li>
+            <li><a href="/delete-account/">Delete account</a></li>
+            <li><a href="/terms/">Terms</a></li>
+          </ul>
+        </div>
+      </div>
+      <p class="site-footer__note">
+        CardScanR is operated by Andrew Gore.
+        Screenshots are from approved CardScanR product UI. No fabricated ratings or user counts.
+      </p>
     </div>
   </footer>
-  <script src="assets/js/site.js" defer></script>
+  <script src="/assets/js/site.js" defer></script>
 </body>
 </html>

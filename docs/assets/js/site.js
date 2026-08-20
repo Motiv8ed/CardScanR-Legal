@@ -1,54 +1,23 @@
-/**
- * CardScanR legal site — local UI helpers only.
- * No analytics, cookies, trackers, or third-party requests (except feedback page).
- */
-(function () {
-  "use strict";
+(() => {
+  const toggle = document.querySelector(".nav-toggle");
+  const nav = document.getElementById("site-nav");
+  if (!toggle || !nav) return;
 
-  // Canonical host: redirect www → apex over HTTPS.
-  if (window.location.hostname === "www.cardscanr.com") {
-    var target =
-      "https://cardscanr.com" +
-      window.location.pathname +
-      window.location.search +
-      window.location.hash;
-    window.location.replace(target);
-    return;
-  }
+  const setOpen = (open) => {
+    nav.classList.toggle("is-open", open);
+    toggle.setAttribute("aria-expanded", open ? "true" : "false");
+    toggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+  };
 
-  document.documentElement.classList.add("js");
+  toggle.addEventListener("click", () => {
+    setOpen(!nav.classList.contains("is-open"));
+  });
 
-  var yearEls = document.querySelectorAll("[data-year]");
-  if (yearEls.length) {
-    var year = String(new Date().getFullYear());
-    yearEls.forEach(function (el) {
-      el.textContent = year;
-    });
-  }
+  nav.querySelectorAll("a").forEach((link) => {
+    link.addEventListener("click", () => setOpen(false));
+  });
 
-  var toggle = document.querySelector(".nav-toggle");
-  var nav = document.getElementById("site-nav");
-  if (toggle && nav) {
-    toggle.addEventListener("click", function () {
-      var open = nav.classList.toggle("nav--open");
-      toggle.setAttribute("aria-expanded", open ? "true" : "false");
-      toggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
-    });
-  }
-
-  var path = window.location.pathname.replace(/\/+$/, "/") || "/";
-  var links = document.querySelectorAll(".nav a[href], .footer-nav a[href]");
-  links.forEach(function (link) {
-    try {
-      var href = link.getAttribute("href");
-      if (!href || href.charAt(0) === "#") return;
-      var url = new URL(href, window.location.href);
-      var linkPath = url.pathname.replace(/\/+$/, "/") || "/";
-      if (linkPath === path) {
-        link.setAttribute("aria-current", "page");
-      }
-    } catch (e) {
-      /* ignore malformed relative paths during local file opens */
-    }
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") setOpen(false);
   });
 })();
