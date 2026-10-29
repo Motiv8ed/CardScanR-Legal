@@ -41,8 +41,10 @@ REQUIRED_PATHS = [
     "robots.txt",
 ]
 
-# At least one of these must exist (Cloudflare Pages owns domain; GitHub uses pending).
-CNAME_OPTIONS = ["CNAME", "CNAME.pending"]
+# Ops/domain records must never sit in docs/: everything in docs/ is served
+# publicly (Cloudflare Pages merge and GitHub Pages fallback). Cloudflare Pages
+# owns the domain, so no CNAME marker is needed. Records live in private ops.
+FORBIDDEN_DOCS_FILES = ["CNAME", "CNAME.pending", "DNS_ROLLBACK_RECORD.md"]
 
 # Merged into dist at Cloudflare deploy — not required in docs/ for link checks.
 DEPLOY_MERGED_PREFIXES = ("beta/", "beta")
@@ -206,23 +208,13 @@ def validate_assetlinks(failures: list[str], notes: list[str]) -> None:
 
 
 def validate_cname(failures: list[str], notes: list[str]) -> None:
-    found = [name for name in CNAME_OPTIONS if (DOCS / name).exists()]
-    if not found:
-        failures.append(
-            "Missing domain marker: docs/CNAME or docs/CNAME.pending required"
-        )
-        return
-    if len(found) > 1:
-        notes.append(
-            "Both CNAME and CNAME.pending exist — Cloudflare Pages should use CNAME; "
-            "remove docs/CNAME from GitHub Pages branch if github.io fallback must stay active"
-        )
+    found = [name for name in FORBIDDEN_DOCS_FILES if (DOCS / name).exists()]
     for name in found:
-        content = (DOCS / name).read_text(encoding="utf-8").strip()
-        if content != "cardscanr.com":
-            failures.append(f"{name}: expected 'cardscanr.com', found {content!r}")
-        else:
-            notes.append(f"{name} present with cardscanr.com")
+        failures.append(
+            f"docs/{name} must not be published; keep domain/DNS records in private ops"
+        )
+    if not found:
+        notes.append("No CNAME or DNS record files in docs/ (Cloudflare Pages owns the domain)")
 
 
 def validate_remote_scripts(rel: str, text: str, failures: list[str]) -> None:

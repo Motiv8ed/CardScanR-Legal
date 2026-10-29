@@ -33,9 +33,10 @@ The deploy script copies `docs/*` into `dist/`, merges beta assets from
 (and `assets/css/beta.css`, `assets/js/beta.js`, `assets/js/config.js`) without
 overwriting `site.css` / `site.js`, and writes merged `_headers` / `_redirects`.
 
-**Do not create `docs/CNAME` while Cloudflare Pages owns the apex domain.** Keep
-`docs/CNAME.pending` in the repository for documentation; GitHub Pages fallback
-continues to work without a CNAME file.
+**Do not create `docs/CNAME` while Cloudflare Pages owns the apex domain.** Do not
+put `CNAME.pending`, DNS snapshots or other ops records in `docs/`: everything in
+`docs/` is served publicly. They are kept in private ops records. GitHub Pages
+fallback continues to work without a CNAME file.
 
 ## GitHub Pages fallback
 
