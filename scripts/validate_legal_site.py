@@ -45,6 +45,7 @@ REQUIRED_PATHS = [
 # publicly (Cloudflare Pages merge and GitHub Pages fallback). Cloudflare Pages
 # owns the domain, so no CNAME marker is needed. Records live in private ops.
 FORBIDDEN_DOCS_FILES = ["CNAME", "CNAME.pending", "DNS_ROLLBACK_RECORD.md"]
+_FORBIDDEN_DOCS_NAMES_LOWER = frozenset(name.lower() for name in FORBIDDEN_DOCS_FILES)
 
 # Merged into dist at Cloudflare deploy — not required in docs/ for link checks.
 DEPLOY_MERGED_PREFIXES = ("beta/", "beta")
@@ -207,11 +208,25 @@ def validate_assetlinks(failures: list[str], notes: list[str]) -> None:
         notes.append(f"{rel}: sha256_cert_fingerprints is empty — App Links incomplete")
 
 
+def find_forbidden_docs_paths(docs_root: Path) -> list[str]:
+    """Return docs-relative paths of forbidden ops/domain files anywhere under docs_root."""
+    if not docs_root.is_dir():
+        return []
+    matches: list[str] = []
+    for path in docs_root.rglob("*"):
+        if not path.is_file():
+            continue
+        if path.name.lower() not in _FORBIDDEN_DOCS_NAMES_LOWER:
+            continue
+        matches.append(path.relative_to(docs_root).as_posix())
+    return sorted(matches)
+
+
 def validate_cname(failures: list[str], notes: list[str]) -> None:
-    found = [name for name in FORBIDDEN_DOCS_FILES if (DOCS / name).exists()]
-    for name in found:
+    found = find_forbidden_docs_paths(DOCS)
+    for rel in found:
         failures.append(
-            f"docs/{name} must not be published; keep domain/DNS records in private ops"
+            f"docs/{rel} must not be published; keep domain/DNS records in private ops"
         )
     if not found:
         notes.append("No CNAME or DNS record files in docs/ (Cloudflare Pages owns the domain)")
